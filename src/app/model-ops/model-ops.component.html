@@ -1,0 +1,72 @@
+<cv-toolbar>
+    <span slot="title">ModelOps</span>
+    <cv-icon-button slot="actionItems" icon="info"></cv-icon-button>
+    <cv-button label="Create" slot="actionItems" outlined></cv-button>
+    <cv-icon-button slot="actionItems" icon="more_vert"></cv-icon-button>
+</cv-toolbar>
+
+<div class="cv-search-bar">
+    <cv-icon>search</cv-icon>
+    <cv-typography scale="body2">Search...</cv-typography>
+
+    <span style="flex: 1;"></span>
+
+    <cv-formfield label="Show archived"><cv-switch></cv-switch></cv-formfield>
+    <cv-icon-button icon="view_list"></cv-icon-button>
+    <cv-icon-button icon="filter_list"></cv-icon-button>
+
+</div>
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+    <ng-container matColumnDef="project">
+      <th mat-header-cell *matHeaderCellDef>Project</th>
+      <td mat-cell *matCellDef="let element">{{element.project}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let element">{{element.description}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="group">
+      <th mat-header-cell *matHeaderCellDef>Group</th>
+      <td mat-cell *matCellDef="let element">{{element.group}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="repo">
+      <th mat-header-cell *matHeaderCellDef>Repository</th>
+      <td mat-cell *matCellDef="let element">{{element.repo}}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="branch">
+        <th mat-header-cell *matHeaderCellDef>Git branch</th>
+        <td mat-cell *matCellDef="let element">{{element.branch}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Git status</th>
+        <td mat-cell *matCellDef="let element">
+            <span *ngIf="element.status === 'Connected'; else negativeStatus" class="cv-theme-positive">
+                <cv-icon>check</cv-icon>
+                {{element.status}}
+            </span>
+
+            <ng-template #negativeStatus>
+                <span class="cv-theme-negative">
+                    <cv-icon>check</cv-icon>
+                    {{element.status}}
+                </span>
+            </ng-template>
+
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Creation date</th>
+        <td mat-cell *matCellDef="let element">{{element.date}}</td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="[row.project]"></tr>
+  </table>

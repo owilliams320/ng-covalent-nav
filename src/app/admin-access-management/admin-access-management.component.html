@@ -1,0 +1,22 @@
+<cv-toolbar style="border-bottom: none;">
+    <span slot="title">Access management</span>
+    <cv-icon-button slot="actionItems" icon="info"></cv-icon-button>
+    <cv-icon-button slot="actionItems" icon="more_vert"></cv-icon-button>
+</cv-toolbar>
+
+<cv-tab-bar>
+    <cv-tab label="Overview"></cv-tab>
+    <cv-tab label="Users"></cv-tab>
+    <cv-tab label="Roles"></cv-tab>
+    <cv-tab label="Identity Providers"></cv-tab>
+    <cv-tab label="Setting"></cv-tab>
+</cv-tab-bar>
+
+<cv-empty-state 
+    headline="You don’t have any identity providers" 
+    subtitle="Use an identity provider (IdP) to manage your user identities outside of VantageCloud Lake, and grant the user identities permissions to use VantageCloud Lake resources."
+    icon="account_circle"
+  >
+    
+    <cv-button slot="buttons" raised>Add a provider</cv-button>
+</cv-empty-state>

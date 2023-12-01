@@ -1,1 +1,270 @@
-/* You can add global styles to this file, and also import other style files */
+
+@use '@angular/material' as mat;
+@use '@material/data-table/data-table';
+@use "@material/layout-grid/mdc-layout-grid";
+
+@import "@covalent/components";
+
+@import '../node_modules/@covalent/core/theming/all-theme';
+
+@import '../node_modules/@covalent/markdown/markdown-theme';
+// @import '../node_modules/@covalent/highlight/highlight-theme';
+@import '../node_modules/@covalent/flavored-markdown/flavored-markdown-theme';
+@import '../node_modules/@covalent/markdown-navigator/markdon-navigator-theme';
+
+// Include the core styles for Covalent
+@include covalent-core();
+
+// Include material icons
+$mat-font-url: './';
+@include covalent-material-icons();
+
+// Include covalent utility classes
+@include covalent-utilities();
+
+// Include flex layout classes
+@include covalent-layout();
+
+// Include covalent color classes
+@include covalent-colors();
+
+@import './teradata-branding';
+
+@include data-table.core-styles;
+@include data-table.theme-baseline;
+
+// Custom typography
+$custom-typography: mat-typography-config(
+  $button: mat-typography-level(14px, 14px, 400),
+);
+$custom-toolbar-typography: mat-typography-config(
+  $title: mat-typography-level(20px, 32px, 400),
+);
+
+// Include the base styles for Angular Material core. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+@include mat.core();
+
+// Use the default configuration.
+$my-typography: mat.define-typography-config();
+@include mat.typography-hierarchy($my-typography);
+
+// Setting the toolbar to the proper spec weight
+@include mat-toolbar-typography($custom-toolbar-typography);
+
+// Dark theme
+@media (prefers-color-scheme: dark) {
+  $primary-dark: mat-palette($td-slate, 800, 200, 900);
+  $accent-dark: mat-palette($td-orange, 500);
+  $warn-dark: mat-palette($mat-red, 600, 200, 900);
+  $theme-dark: mat-dark-theme($primary-dark, $accent-dark, $warn-dark);
+  $theme-dark: map_merge(
+    $theme-dark,
+    (
+      background: $td-dark-theme-background,
+      foreground: $td-dark-theme-foreground,
+    )
+  );
+  $background: map-get($theme-dark, background);
+
+  @include mat.all-component-themes($theme-dark);
+  @include covalent-theme($theme-dark);
+  @include covalent-markdown-theme($theme-dark);
+  //@include covalent-highlight-theme($theme-dark);
+  @include covalent-flavored-markdown-theme($theme-dark);
+  @include covalent-markdown-navigator-theme($theme-dark);
+  @include covalent-markdown-navigator-typography($custom-typography);
+
+  body {
+    color: #fff;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+  }
+}
+
+
+:root {
+  tr.mdc-data-table__row.mdc-data-table__row--non-interactive:not(.mdc-data-table__row--selected):hover {
+    background-color: transparent;
+  } 
+  --mdc-icon-font: 'Material Symbols Outlined';
+}
+
+// TODO: move border style to Covalent
+cv-toolbar {
+  border-bottom: 1px solid var(--mdc-theme-border);
+}
+
+
+.cv-theme-positive {
+  color:var(--mdc-theme-positive) !important;
+}
+.cv-theme-negative {
+  color:var(--mdc-theme-negative) !important;
+}
+.cv-theme-caution {
+  color:var(--mdc-theme-caution) !important;
+}
+.cv-theme-primary {
+  color:var(--mdc-theme-primary) !important;
+}
+
+.cv-search-bar {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--mdc-theme-border);
+  padding: 0 8px 0 16px;
+  min-height: 57px;
+  
+
+  cv-typography {
+    margin-left: 32px;
+    color: var(--mdc-theme-text-disabled-on-background)
+  }
+}
+
+.mdc-data-table__cell  {
+  cv-icon {
+      margin-top:-4px;
+  }
+  cv-icon, cv-circular-progress {
+      float: left;
+      margin-right: 8px;
+  }
+}
+
+/* Dumb stuff */
+[ng-reflect-router-link] {
+  cursor: pointer;
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+
+
+

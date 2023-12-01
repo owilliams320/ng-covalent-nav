@@ -1,0 +1,63 @@
+<cv-toolbar>
+    <span slot="title">{{sectionName}}</span>
+    <cv-icon-button slot="actionItems" icon="refresh"></cv-icon-button>
+    <cv-icon-button slot="actionItems" icon="info"></cv-icon-button>
+    <cv-button label="Define BYOM Model" slot="actionItems" outlined></cv-button>
+    <cv-icon-button slot="actionItems" icon="more_vert"></cv-icon-button>
+</cv-toolbar>
+
+<img src="assets/placeholder-content/model-ops-charts.png" style="width: 100%; margin: 0 auto; display: block;"/>
+
+<div class="cv-search-bar">
+    <cv-icon>search</cv-icon>
+    <cv-typography scale="body2">Search...</cv-typography>
+
+    <span style="flex: 1;"></span>
+
+    <cv-formfield label="Show archived"><cv-switch></cv-switch></cv-formfield>
+    <cv-icon-button icon="view_list"></cv-icon-button>
+    <cv-icon-button icon="filter_list"></cv-icon-button>
+
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let element">{{element.id}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
+  
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let element">{{element.description}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let element">{{element.type}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="language">
+      <th mat-header-cell *matHeaderCellDef>Language</th>
+      <td mat-cell *matCellDef="let element">{{element.language}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="alerts">
+        <th mat-header-cell *matHeaderCellDef>Enable alerts</th>
+        <td mat-cell *matCellDef="let element">
+            <cv-switch></cv-switch>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Creation date</th>
+        <td mat-cell *matCellDef="let element">{{element.date}}</td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['model', row.name]" ></tr>
+  </table>

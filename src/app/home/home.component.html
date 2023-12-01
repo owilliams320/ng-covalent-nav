@@ -1,0 +1,168 @@
+<div class="welcome-container">
+  <cv-typography scale="headline3" class="welcome-headline">Welcome to VantageCloud Lake</cv-typography>
+  <cv-toolbar>
+    <span slot="title">Environments</span>
+    <cv-button label="Add an Environment" slot="actionItems" outlined></cv-button>
+  </cv-toolbar>
+
+  <div class="mdc-data-table" style="display: flex" style="display: flex">
+    <div class="mdc-data-table__table-container">
+      <table class="mdc-data-table__table" aria-label="Dessert calories">
+        <thead>
+          <tr class="mdc-data-table__header-row">
+            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">
+            </th>
+            <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">
+              Units remaining
+            </th>
+            <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">
+              Units consumed
+            </th>
+            <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">
+              Primary cluster
+            </th>
+            <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">
+              Compute clusters
+            </th>
+            <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader" scope="col">
+            </th>
+          </tr>
+        </thead>
+        <tbody class="mdc-data-table__content">
+          <tr class="mdc-data-table__row mdc-data-table__row--non-interactive">
+            <th class="mdc-data-table__cell" scope="row">
+              <cv-typography scale="headline6">Overall</cv-typography>
+            </th>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">
+              <cv-typography scale="headline6">300 K</cv-typography>
+            </td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">
+              <cv-typography scale="headline6">500 K</cv-typography>
+            </td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">
+              <cv-typography scale="headline6">435 K</cv-typography>
+            </td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">
+              <cv-typography scale="headline6">65 K</cv-typography>
+            </td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric"></td>
+          </tr>
+          <tr class="mdc-data-table__row" [routerLink]="['environments','Production']" >
+            <th class="mdc-data-table__cell" scope="row">
+              <cv-text-lockup subtext="Active" scale="small" icon="check" state="positive"
+                trailingSubText>Production</cv-text-lockup>
+            </th>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric"></td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">
+              125 K
+            </td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">100 K (85%)</td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">25 K (15%)</td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric"><cv-icon-button
+                icon="arrow_forward"></cv-icon-button></td>
+          </tr>
+          <tr class="mdc-data-table__row" [routerLink]="['environments','Staging']">
+            <th class="mdc-data-table__cell" scope="row">
+              <cv-text-lockup subtext="Active" scale="small" icon="check" state="positive"
+                trailingSubText>Staging</cv-text-lockup>
+            </th>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric"></td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">
+              25 K
+            </td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">23 K (92%)</td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">2 K (18%)</td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric"><cv-icon-button
+                icon="arrow_forward"></cv-icon-button></td>
+          </tr>
+          <tr class="mdc-data-table__row" [routerLink]="['environments','Development']">
+            <th class="mdc-data-table__cell" scope="row">
+              <cv-text-lockup subtext="Active" scale="small" icon="check" state="positive"
+                trailingSubText>Development</cv-text-lockup>
+            </th>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric"></td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">
+              100 K
+            </td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">92 K (92%)</td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">8 K (8%)</td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric"><cv-icon-button
+                icon="arrow_forward"></cv-icon-button></td>
+          </tr>
+          <tr class="mdc-data-table__row" [routerLink]="['environments','Your sandbox']">
+            <th class="mdc-data-table__cell" scope="row">
+              <cv-text-lockup subtext="Deploying" scale="small" icon="pending" state="active" trailingSubText>Your
+                sandbox</cv-text-lockup>
+            </th>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric"></td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">
+              250 K
+            </td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">220 K (88%)</td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric">30 K (12%)</td>
+            <td class="mdc-data-table__cell mdc-data-table__cell--numeric"><cv-icon-button
+                icon="arrow_forward"></cv-icon-button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+</div>
+
+<div class="mdc-layout-grid">
+  <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+      <cv-card cardtitle='Recent backups' outlined actionBar>
+        <cv-list>
+          <cv-list-item twoline hasMeta>
+            Backup 4
+            <span slot="secondary" class="cv-theme-positive"><cv-icon>check</cv-icon>Complete</span>
+            <span slot="meta"><cv-icon>arrow_forward</cv-icon></span>
+          </cv-list-item>
+          <cv-list-item twoline hasMeta>
+            Backup 3
+            <span slot="secondary" class="cv-theme-positive"><cv-icon>check</cv-icon>Complete</span>
+            <span slot="meta"><cv-icon>arrow_forward</cv-icon></span>
+          </cv-list-item>
+          <cv-list-item twoline hasMeta>
+            Backup 2
+            <span slot="secondary" class="cv-theme-positive"><cv-icon>check</cv-icon>Complete</span>
+            <span slot="meta"><cv-icon>arrow_forward</cv-icon></span>
+          </cv-list-item>
+          <cv-list-item twoline hasMeta>
+            Backup 1
+            <span slot="secondary" class="cv-theme-caution"><cv-circular-progress indeterminate
+                density="-8"></cv-circular-progress>Running</span>
+            <span slot="meta"><cv-icon slot="meta">arrow_forward</cv-icon></span>
+          </cv-list-item>
+        </cv-list>
+
+        <div slot="card-actions">
+          <cv-button label="View all"></cv-button>
+        </div>
+      </cv-card>
+    </div>
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+      <cv-card cardtitle='Manage account' outlined actionBar>
+
+        <cv-list>
+          <cv-list-item [routerLink]="['admin', 'access-management']">
+            Access management
+            <span slot="secondary" class="cv-theme-positive"><cv-icon>check</cv-icon>Complete</span>
+            <span slot="meta"><cv-icon>arrow_forward</cv-icon></span>
+          </cv-list-item>
+          <cv-list-item [routerLink]="['admin', 'data']">
+            Data & security
+            <span slot="secondary" class="cv-theme-positive"><cv-icon>check</cv-icon>Complete</span>
+            <span slot="meta"><cv-icon>arrow_forward</cv-icon></span>
+          </cv-list-item>
+        </cv-list>
+
+        <div slot="card-actions">
+          <cv-button label="View all"></cv-button>
+        </div>
+      </cv-card>
+    </div>
+  </div>
+</div>
