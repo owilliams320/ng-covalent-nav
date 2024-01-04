@@ -182,18 +182,9 @@ export class AppComponent {
             label: 'Editor'
           },
           {
-            label: 'Share & explore',
-            icon: 'explore',
-            children: [
-              {
-                path: '/data-catalog',
-                label: 'Data catalog'
-              },
-              {
-                path: '/data-sharing',
-                label: 'Data sharing'
-              },
-            ]
+            path: '/environments',
+            label: 'Environments',
+            icon: 'language',
           },
           {
             label: 'Monitor',
@@ -204,45 +195,66 @@ export class AppComponent {
                 label: 'Overview'
               },
               {
-                path: '/monitor/budgets',
-                label: 'Budgets'
+                path: '/monitor/queries',
+                label: 'Queries'
               },
               {
                 path: '/monitor/consumption',
                 label: 'Consumption'
               },
               {
-                path: '/monitor/queries',
-                label: 'Queries'
+                path: '/monitor/cost-calculator',
+                label: 'Cost calculator'
+              },
+              {
+                path: '/monitor/alerts',
+                label: 'Alerts'
               },
             ]
           },
           {
-            path: '/environments',
-            label: 'Environments',
-            icon: 'language',
-          },
-          {
-            label: 'Model Ops',
-            path: '/model-ops',
-            icon: 'webhook',
-          },
-          {
-            label: 'Admin',
-            icon: 'folder',
+            label: "Access management",
+            path: '/access-management',
+            icon: "person",
             children: [
               {
-                path: '/admin/data',
-                label: 'Data'
+                path: 'access-management',
+                label: 'Organization Admins'
               },
               {
-                path: '/admin/access-management',
-                label: 'Access management'
+                path: '/access-management/identity-providers',
+                label: 'Identity providers'
               },
               {
-                path: '/admin/environments',
-                label: 'Environments'
-              }
+                path: '/access-management/realms',
+                label: 'Realms'
+              },
+              {
+                path: '/access-management/token-access',
+                label: 'Token access'
+              },
+            ]
+          },
+          {
+            label: 'Data management',
+            icon: 'database',
+            children: [
+              {
+                path: '/data-management/overview',
+                label: 'Overview'
+              },
+              {
+                path: '/data-management/data-copy',
+                label: 'Data copy'
+              },
+              {
+                path: '/data-management/data-migration',
+                label: 'Data migration'
+              },
+              {
+                path: '/data-management/flows',
+                label: 'Flows'
+              },
             ]
           },
         ]
@@ -256,24 +268,24 @@ export class AppComponent {
             label: this.sectionName
           },
           {
+            path: ['/environments', this.sectionName, 'users'],
+            icon: 'nearby',
+            label: 'Users'
+          },
+          {
+            path: ['/environments', this.sectionName, 'compute-groups'],
+            icon: 'nearby',
+            label: 'Compute groups'
+          },
+          {
             path: ['/environments', this.sectionName, 'backups'],
             icon: 'nearby',
             label: 'Backups'
           },
           {
-            path: ['/environments', this.sectionName, 'compute-groups'],
+            path: ['/environments', this.sectionName, 'query-grid'],
             icon: 'nearby',
-            label: 'Compute-groups'
-          },
-          {
-            path: ['/environments', this.sectionName, 'flows'],
-            icon: 'nearby',
-            label: 'Flows'
-          },
-          {
-            path: ['/environments', this.sectionName, 'queries'],
-            icon: 'compare_arrows',
-            label: 'Queries'
+            label: 'QueryGrid'
           },
         ]
       },
@@ -287,86 +299,6 @@ export class AppComponent {
           },
         ]
       },
-      'modelOps': {
-        path: '/model-ops/**',
-        children: [
-          {
-            path: ['/model-ops', this.sectionName],
-            icon: 'webhook',
-            label: this.sectionName
-          },
-          {
-            path: ['/model-ops', this.sectionName, 'deployments'],
-            icon: 'deployed_code',
-            label: 'Deployments'
-          },
-          {
-            path: ['/model-ops', this.sectionName, 'data-sets'],
-            icon: 'nearby',
-            label: 'Data sets'
-          },
-          {
-            path: ['/model-ops', this.sectionName, 'jobs'],
-            icon: 'nearby',
-            label: 'Jobs'
-          },
-          {
-            path: ['/model-ops', this.sectionName, 'alerts'],
-            icon: 'new_releases',
-            label: 'Alerts'
-          },
-          {
-            path: ['/model-ops', this.sectionName, 'settings'],
-            icon: 'settings',
-            label: 'Settings'
-          },
-        ]
-      },
-      'modelOpsModel': {
-        path: '/model-ops/**/model/**',
-        children: [
-          {
-            path: `${this.sectionParentRoute}/model/${this.sectionName}`,
-            icon: 'webhook',
-            label: this.sectionName
-          },
-          {
-            path: `${this.sectionParentRoute}/model/${this.sectionName}/commit-history`,
-            icon: 'nearby',
-            label: 'Commit history'
-          },
-          {
-            path: `${this.sectionParentRoute}/model/${this.sectionName}/alerts`,
-            icon: 'nearby',
-            label: 'Alerts'
-          },
-        ]
-      },
-      'modelOpsRun': {
-        path: '/model-ops/*/model/*/run/**',
-        children: [
-          {
-            path:  [this.sectionParentRoute, 'run', this.sectionName],
-            icon: 'webhook',
-            label: this.sectionName
-          },
-          {
-            path: [this.sectionParentRoute, 'run', this.sectionName, 'life-cycle'],
-            icon: 'nearby',
-            label: 'Life cycle'
-          },
-          {
-            path: [this.sectionParentRoute, 'run', this.sectionName, 'artifacts'],
-            icon: 'nearby',
-            label: 'Artifacts'
-          },
-          {
-            path: [this.sectionParentRoute, 'run', this.sectionName, 'jobs'],
-            icon: 'nearby',
-            label: 'Jobs'
-          },
-        ]
-      }
     }
     const navMatches = [];
 
