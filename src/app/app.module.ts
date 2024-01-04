@@ -33,6 +33,8 @@ import { EnvironmentOverviewComponent } from './environment/overview/overview.co
 import { FlowsComponent } from './environment/flows/flows.component';
 import { BackupsComponent } from './environment/backups/backups.component';
 import { ConsumptionDetailComponent } from './monitor/consumption-detail/consumption-detail.component';
+import { CostCalculatorComponent } from './monitor/cost-calculator/cost-calculator.component';
+import { UsersComponent } from './environment/users/users.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,8 @@ import { ConsumptionDetailComponent } from './monitor/consumption-detail/consump
     FlowsComponent,
     BackupsComponent,
     ConsumptionDetailComponent,
+    CostCalculatorComponent,
+    UsersComponent
 
   ],
   imports: [

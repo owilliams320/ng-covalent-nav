@@ -25,6 +25,9 @@ import { FlowsComponent } from './environment/flows/flows.component';
 import { BackupsComponent } from './environment/backups/backups.component';
 import { ConsumptionDetailComponent } from './monitor/consumption-detail/consumption-detail.component';
 import { QueryGridComponent } from './environment/query-grid/query-grid.component';
+import { CostCalculatorComponent } from './monitor/cost-calculator/cost-calculator.component';
+import { UsersComponent } from './environment/users/users.component';
+import { AlertsComponent } from './alerts/alerts.component';
 
 const titlePrefix = 'Vantage cloud lake |';
 
@@ -61,6 +64,10 @@ const routes: Routes = [
             component: EnvironmentOverviewComponent,
           },
           {
+            path: 'users',
+            component: UsersComponent,
+          },
+          {
             path: 'backups',
             component: BackupsComponent,
           },
@@ -69,11 +76,7 @@ const routes: Routes = [
             component: ComputeGroupsComponent,
           },
           {
-            path: 'flows',
-            component: FlowsComponent,
-          },
-          {
-            path: 'queries',
+            path: 'query-grid',
             component: QueryGridComponent,
           },
         ],
@@ -118,6 +121,14 @@ const routes: Routes = [
       {
         path: 'consumption',
         component: ConsumptionComponent
+      },
+      {
+        path: 'cost-calculator',
+        component: CostCalculatorComponent
+      },
+      {
+        path: 'alerts',
+        component: AlertsComponent
       },
       {
         path: 'consumption/:id',
