@@ -23,9 +23,8 @@
     "@covalent/markdown": "6.3.0",
     "@covalent/flavored-markdown": "6.3.0",
 
-    "@covalent/markdown-navigator": "7.5.0-beta.3",
-
-    "@covalent/components": "7.5.0-beta.3",
+    "@covalent/markdown-navigator": "8.1.0-beta.3",
+    "@covalent/components": "8.1.0-beta.3",
     "@material/data-table": "15.0.0-canary.83355c322.0",
     "minimatch": "^9.0.3",
     "rxjs": "^7.4.0",
