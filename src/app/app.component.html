@@ -1,4 +1,4 @@
-<cv-app-shell appName="Vantage Cloud Lake" [sectionName]="sectionParentName" [helpOpen]="helpOpen && helpDocked">
+<cv-app-shell appName="Vantage Cloud Lake" [sectionName]="sectionParentName" [helpOpen]="helpOpen && helpDocked" (:CovalentAppShell:menuClick)="menuToggled()" [forcedOpen]="forcedOpen" [open]="forcedOpen">
     <svg
         slot="logo" 
         width="103" 
@@ -160,7 +160,10 @@
 
       <div slot="help" class="mdc-typography">
         <cv-toolbar>
-          <span slot="title">Help</span>
+          <cv-tab-bar slot="title">
+            <cv-tab label="Help"></cv-tab>
+            <cv-tab label="Ask.ai"></cv-tab>
+          </cv-tab-bar>
           <cv-icon-button
             slot="actionItems"
             icon="open_in_browser"

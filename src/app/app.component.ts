@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd, ActivationEnd, NavigationStart } from '@angular/router';
 
 import '@covalent/components/app-shell';
@@ -11,6 +11,8 @@ import '@covalent/components/toolbar';
 import '@covalent/components/menu';
 import '@covalent/components/switch';
 import '@covalent/components/formfield';
+import '@covalent/components/tab';
+
 
 // TODO: import below should not be required for app-shell
 import '@covalent/components/top-app-bar-fixed';
@@ -59,8 +61,16 @@ export class AppComponent {
   sectionName?:  string;
   sectionParentName?: string;
   sectionParentRoute?: string;
+  get forcedOpen() {
+    return !!JSON.parse(localStorage.getItem('app-preference-open') ?? '' ) || false;
+  };
+  set forcedOpen(open) {
+    localStorage.setItem('app-preference-open', open.toString())
+  };
+
   helpOpen = false;
   helpDocked = true;
+  
   helpDialog?: MatDialogRef<TdMarkdownNavigatorWindowComponent>;
   
   currentRoute!: navigationItem[];
@@ -71,6 +81,7 @@ export class AppComponent {
 
   _helpBaseUrl = 'https://www.teradata.com/product-help/';
   readonly USE_CASES_ID: string = 'bkm1640280721917';
+
 
   items:IMarkdownNavigatorItem[] = [
     {
@@ -388,6 +399,10 @@ export class AppComponent {
         }
       }
     });
+  }
+
+  menuToggled() {
+    this.forcedOpen = !this.forcedOpen;
   }
   
   getHelpJSON(fileName = 'Vantage/base-help-en.json'): Observable<IMarkdownNavigatorItem[]> {
