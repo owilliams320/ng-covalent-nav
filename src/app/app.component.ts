@@ -61,12 +61,7 @@ export class AppComponent {
   sectionName?:  string;
   sectionParentName?: string;
   sectionParentRoute?: string;
-  get forcedOpen() {
-    return !!JSON.parse(localStorage.getItem('app-preference-open') ?? '' ) || false;
-  };
-  set forcedOpen(open) {
-    localStorage.setItem('app-preference-open', open.toString())
-  };
+  forcedOpen!: boolean;
 
   helpOpen = false;
   helpDocked = true;
@@ -129,6 +124,9 @@ export class AppComponent {
     //   }
     // })
 
+
+    this.forcedOpen = JSON.parse(localStorage.getItem('app-preference-open') || 'false');
+
     combineLatest([
       this.router.events.pipe(filter( event => event instanceof NavigationEnd)),
       this.nav.navTitle$,
@@ -144,7 +142,6 @@ export class AppComponent {
 
       this.setCurrentRoute(url);
     })
-
 
     this.getHelpJSON()
     .subscribe({
@@ -403,6 +400,7 @@ export class AppComponent {
 
   menuToggled() {
     this.forcedOpen = !this.forcedOpen;
+    localStorage.setItem('app-preference-open', this.forcedOpen.toString())
   }
   
   getHelpJSON(fileName = 'Vantage/base-help-en.json'): Observable<IMarkdownNavigatorItem[]> {
