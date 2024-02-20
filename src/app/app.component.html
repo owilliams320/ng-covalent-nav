@@ -1,4 +1,11 @@
-<cv-app-shell appName="Vantage Cloud Lake" [sectionName]="sectionParentName" [helpOpen]="helpOpen && helpDocked" (:CovalentAppShell:menuClick)="menuToggled()" [forcedOpen]="forcedOpen" [open]="forcedOpen">
+<cv-app-shell
+  appName="Vantage Cloud Lake"
+  [sectionName]="sectionParentName"
+  [helpOpen]="helpOpen && helpDocked"
+  (:CovalentAppShell:menuClick)="menuToggled()"
+  [forcedOpen]="forcedOpen"
+  [open]="forcedOpen" 
+  [contained]="mainSectionContained">
     <svg
         slot="logo" 
         width="103" 
@@ -143,20 +150,17 @@
         </ng-template> -->
       </cv-list>
 
-      <cv-list class="navigation-rail" slot="user-menu">
-        <cv-nav-list-item graphic="avatar">
-          <span>Notifications</span>
-          <cv-icon slot="graphic">notifications</cv-icon>
-        </cv-nav-list-item>
-        <cv-nav-list-item graphic="avatar" class="help-item" #helpToggleItem >
-          <span>Help</span>
-          <cv-icon slot="graphic">help</cv-icon>
-        </cv-nav-list-item>
-        <cv-nav-list-item graphic="avatar">
-          <span>Account</span>
-          <cv-icon slot="graphic">person</cv-icon>
-        </cv-nav-list-item>
-      </cv-list>
+      <cv-toolbar slot="user-menu" no-divider>
+        <span slot="title" style="display:flex; align-items: center">
+         <cv-typography scale="body1">All environments</cv-typography>
+         <cv-icon>arrow_drop_down</cv-icon>
+        </span>
+        
+        <cv-textfield slot="actionItems" icon="forum" placeholder="Message ask.ai" dense></cv-textfield>
+        <cv-icon-button slot="actionItems" icon="notifications"></cv-icon-button>
+        <cv-icon-button slot="actionItems" icon="help" class="help-item" #helpToggleItem></cv-icon-button>
+        <cv-icon-button slot="actionItems" icon="person"></cv-icon-button>
+       </cv-toolbar>
 
       <div slot="help" class="mdc-typography">
         <cv-toolbar>

@@ -12,6 +12,7 @@ import '@covalent/components/menu';
 import '@covalent/components/switch';
 import '@covalent/components/formfield';
 import '@covalent/components/tab';
+import '@covalent/components/textfield';
 
 
 // TODO: import below should not be required for app-shell
@@ -65,6 +66,7 @@ export class AppComponent {
 
   helpOpen = false;
   helpDocked = true;
+  mainSectionContained = false;
   
   helpDialog?: MatDialogRef<TdMarkdownNavigatorWindowComponent>;
   
@@ -124,8 +126,13 @@ export class AppComponent {
     //   }
     // })
 
-
     this.forcedOpen = JSON.parse(localStorage.getItem('app-preference-open') || 'false');
+
+    this.router.events.pipe(filter( event => event instanceof NavigationEnd)).subscribe((event)=>{
+      const {url} = (event as NavigationEnd);
+
+      this.mainSectionContained = url === '/' ? false : true;
+    })
 
     combineLatest([
       this.router.events.pipe(filter( event => event instanceof NavigationEnd)),

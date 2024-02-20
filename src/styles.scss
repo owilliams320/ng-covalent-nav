@@ -85,6 +85,10 @@ $theme-light: $td-light-theme;
 // TODO: move border style to Covalent
 cv-toolbar {
   border-bottom: 1px solid var(--mdc-theme-border);
+
+  &[no-divider] {
+    border-bottom: none;
+  }
 }
 
 .mat-icon {
