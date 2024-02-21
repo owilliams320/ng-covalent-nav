@@ -36,7 +36,7 @@
             [attr.selected]="checkActive(navRoute.path)"
             [routerLink]="navRoute.path"
           >
-            <cv-icon slot="graphic">{{ navRoute.icon }}</cv-icon>
+            <cv-icon slot="graphic" [ngClass]="{'covalent-icon' : navRoute.covalentIcon}">{{ navRoute.icon }}</cv-icon>
             {{navRoute.label}}
           </cv-nav-list-item>
 
@@ -49,7 +49,7 @@
                 {{navRoute.label}}
               </span>
   
-              <cv-icon slot="graphic">{{navRoute.icon}}</cv-icon>
+              <cv-icon slot="graphic" [ngClass]="{'covalent-icon' : navRoute.covalentIcon}">{{navRoute.icon}}</cv-icon>
               <cv-list class="subnav" slot="expansion-panel">
                 <cv-nav-list-item
                   *ngFor="let subNavRoute of navRoute.children"

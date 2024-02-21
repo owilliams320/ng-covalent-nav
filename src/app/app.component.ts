@@ -33,6 +33,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 
 export interface navigationItem {
   icon?:string,
+  covalentIcon?: true,
   path?: string|any[],
   label?: string, 
   children?: navigationItem[]
@@ -193,7 +194,8 @@ export class AppComponent {
           },
           {
             path: '/editor',
-            icon: 'code',
+            icon: 'product_editor',
+            covalentIcon: true,
             label: 'Editor'
           },
           {
@@ -252,7 +254,8 @@ export class AppComponent {
           },
           {
             label: 'Data management',
-            icon: 'database',
+            icon: 'data_management',
+            covalentIcon: true,
             children: [
               {
                 path: '/data-management/overview',
