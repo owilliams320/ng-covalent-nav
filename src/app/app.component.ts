@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd, ActivationEnd, NavigationStart } from '@angular/router';
-
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import '@covalent/components/app-shell';
 import '@covalent/components/button';
 import '@covalent/components/icon';
@@ -18,7 +18,7 @@ import '@covalent/components/textfield';
 // TODO: import below should not be required for app-shell
 import '@covalent/components/top-app-bar-fixed';
 
-import { BehaviorSubject, Observable, Subject, combineLatest, filter, map, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, combineLatest, filter, map, switchMap, switchScan } from 'rxjs';
 import { minimatch } from 'minimatch';
 import { NavigationService } from './navigation.service';
 import { slideInLeftAnimation, slideInUpAnimation } from './app.animations';
@@ -67,7 +67,7 @@ export class AppComponent {
 
   helpOpen = false;
   helpDocked = true;
-  mainSectionContained = false;
+  mainSectionContained = true;
   
   helpDialog?: MatDialogRef<TdMarkdownNavigatorWindowComponent>;
   
@@ -79,7 +79,6 @@ export class AppComponent {
 
   _helpBaseUrl = 'https://www.teradata.com/product-help/';
   readonly USE_CASES_ID: string = 'bkm1640280721917';
-
 
   items:IMarkdownNavigatorItem[] = [
     {
@@ -120,26 +119,21 @@ export class AppComponent {
     ) {}
 
   ngOnInit(): void {
-
-    // this.router.events.pipe(filter( event => event instanceof NavigationStart)).subscribe((event)=>{
-    //   if (this.currentRoute?.toString()!==(this.navRoutes((event as NavigationStart).url)).children.toString()) {
-    //     this.isNavigating = true;
-    //   }
-    // })
-
+    // Set the forced open state based on local storage preference
     this.forcedOpen = JSON.parse(localStorage.getItem('app-preference-open') || 'false');
 
-    this.router.events.pipe(filter( event => event instanceof NavigationEnd)).subscribe((event)=>{
-      const {url} = (event as NavigationEnd);
+    const onNavigationEnd$ = this.router.events.pipe(filter( event => event instanceof NavigationEnd), takeUntilDestroyed());
 
-      this.mainSectionContained = url === '/' ? false : true;
+    onNavigationEnd$.subscribe((event)=>{
+      const {url} = (event as NavigationEnd);
+      if (!url){return;}
+      this.setContainedPage(url);
     })
 
     combineLatest([
-      this.router.events.pipe(filter( event => event instanceof NavigationEnd)),
+      onNavigationEnd$,
       this.nav.navTitle$,
-    ])
-    .subscribe(( [event, navTitle] ) => {
+    ]).pipe(takeUntilDestroyed()).subscribe(( [event, navTitle] ) => {
       this.sectionName = navTitle.sectionName;
       this.sectionParentName = navTitle.name;
       this.sectionParentRoute = navTitle.route;
@@ -149,7 +143,7 @@ export class AppComponent {
       if (!url){return;}
 
       this.setCurrentRoute(url);
-    })
+    });
 
     this.getHelpJSON()
     .subscribe({
@@ -160,13 +154,26 @@ export class AppComponent {
   }
 
   ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
-
     this.helpToggleItem.nativeElement.addEventListener('click', () => this.toggleHelp())
     this.helpCloseButton.nativeElement.addEventListener('click', () => this.toggleHelp())
     this.helpUndockButton.nativeElement.addEventListener('click', () => this.toggleDockedMode())
+  }
 
+  setContainedPage(url: string) {
+    // List of page URLs that should NOT show the contained state
+    const barePages = ['/', '/environments/*'];
+    let mainSectionContained = true;
+    
+    for(let i=0; i<barePages.length;i++) {
+      // Match the array of patterns to their 
+      if(minimatch(url, barePages[i])) {
+        mainSectionContained = false;
+        break;
+      }
+    }
+
+    this.mainSectionContained = mainSectionContained;
+    this.cdr.markForCheck();
   }
 
   setCurrentRoute(url: string){
