@@ -10,13 +10,11 @@
 @import '../node_modules/@covalent/core/theming/teradata-theme';
 
 @import '../node_modules/@covalent/markdown/markdown-theme';
-// @import '../node_modules/@covalent/highlight/highlight-theme';
+@import '../node_modules/@covalent/highlight/highlight-theme';
 @import '../node_modules/@covalent/flavored-markdown/flavored-markdown-theme';
 @import '../node_modules/@covalent/markdown-navigator/markdon-navigator-theme';
 
 @import './reset';
-
-
 
 // Include the core styles for Covalent
 @include covalent-core();
@@ -48,10 +46,12 @@ $my-typography: mat.define-typography-config();
 //Light theme
 $theme-light: $td-light-theme;
 
+// Emit theme-dependent styles for common features used across multiple components.
+@include mat.core-theme($theme-light);
 @include mat.all-component-themes($theme-light);
 @include covalent-theme($theme-light);
 @include covalent-markdown-theme($theme-light);
-//@include covalent-highlight-theme($theme-dark);
+@include covalent-highlight-theme($theme-light);
 @include covalent-flavored-markdown-theme($theme-light);
 @include covalent-markdown-navigator-theme($theme-light);
 @include covalent-markdown-navigator-typography($td-custom-typography);
@@ -61,10 +61,11 @@ $theme-light: $td-light-theme;
 @media (prefers-color-scheme: dark) {
   $theme-dark: $td-dark-theme;
 
+  @include mat.core-theme($theme-dark);
   @include mat.all-component-themes($theme-dark);
   @include covalent-theme($theme-dark);
   @include covalent-markdown-theme($theme-dark);
-  //@include covalent-highlight-theme($theme-dark);
+  @include covalent-highlight-theme($theme-dark);
   @include covalent-flavored-markdown-theme($theme-dark);
   @include covalent-markdown-navigator-theme($theme-dark);
 
@@ -80,15 +81,6 @@ $theme-light: $td-light-theme;
     background-color: transparent;
   } 
   --mdc-icon-font: 'Material Symbols Outlined';
-}
-
-// TODO: move border style to Covalent
-cv-toolbar {
-  border-bottom: 1px solid var(--mdc-theme-border);
-
-  &[no-divider] {
-    border-bottom: none;
-  }
 }
 
 .mat-icon {

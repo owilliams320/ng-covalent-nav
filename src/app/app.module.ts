@@ -18,6 +18,7 @@ import { ModelRunComponent } from './model-ops/model-run/model-run.component';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { CovalentMarkdownNavigatorModule } from '@covalent/markdown-navigator';
+import { CovalentCommonModule } from '@covalent/core/common';
 
 
 import { OverviewComponent } from './monitor/overview/overview.component';
@@ -75,6 +76,7 @@ import { UsersComponent } from './environment/users/users.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     MatTableModule,
+    CovalentCommonModule,
     CovalentMarkdownNavigatorModule,
   ],
   providers: [],

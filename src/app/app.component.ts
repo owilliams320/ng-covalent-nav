@@ -1,10 +1,16 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import '@covalent/components/app-shell';
 import '@covalent/components/button';
 import '@covalent/components/icon';
-import '@covalent/components/icon-button'; 
+import '@covalent/components/icon-button';
 import '@covalent/components/list/list';
 import '@covalent/components/list/nav-list-item';
 import '@covalent/components/toolbar';
@@ -14,11 +20,19 @@ import '@covalent/components/formfield';
 import '@covalent/components/tab';
 import '@covalent/components/textfield';
 
-
 // TODO: import below should not be required for app-shell
 import '@covalent/components/top-app-bar-fixed';
 
-import { BehaviorSubject, Observable, Subject, combineLatest, filter, map, switchMap, switchScan } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  combineLatest,
+  filter,
+  map,
+  switchMap,
+  switchScan,
+} from 'rxjs';
 import { minimatch } from 'minimatch';
 import { NavigationService } from './navigation.service';
 import { slideInLeftAnimation, slideInUpAnimation } from './app.animations';
@@ -27,25 +41,25 @@ import {
   IMarkdownNavigatorItem,
   TdMarkdownNavigatorWindowComponent,
   TdMarkdownNavigatorWindowService,
- } from '@covalent/markdown-navigator';
+} from '@covalent/markdown-navigator';
 import { HttpClient } from '@angular/common/http';
 import { MatDialogRef } from '@angular/material/dialog';
 
 export interface navigationItem {
-  icon?:string,
-  covalentIcon?: true,
-  path?: string|any[],
-  label?: string, 
-  children?: navigationItem[]
+  icon?: string;
+  covalentIcon?: true;
+  path?: string | any[];
+  label?: string;
+  children?: navigationItem[];
 }
 
-export interface navMapItem  {
-  path: string,
-  showSectionTitle?: boolean,
-  sectionTitle?: string,
-  children: navigationItem[],
-  parentName?: string,
-  parentRoute?: string,
+export interface navMapItem {
+  path: string;
+  showSectionTitle?: boolean;
+  sectionTitle?: string;
+  children: navigationItem[];
+  parentName?: string;
+  parentRoute?: string;
 }
 
 export interface IHelpBase {
@@ -57,10 +71,10 @@ export interface IHelpBase {
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./app.component.scss'],
-  animations: [ slideInLeftAnimation ]
+  animations: [slideInLeftAnimation],
 })
 export class AppComponent {
-  sectionName?:  string;
+  sectionName?: string;
   sectionParentName?: string;
   sectionParentRoute?: string;
   forcedOpen!: boolean;
@@ -68,11 +82,13 @@ export class AppComponent {
   helpOpen = false;
   helpDocked = true;
   mainSectionContained = true;
-  
+
   helpDialog?: MatDialogRef<TdMarkdownNavigatorWindowComponent>;
-  
+
   currentRoute!: navigationItem[];
-  currentRouteSub = new BehaviorSubject<navigationItem[]>(this.navRoutes('').children);
+  currentRouteSub = new BehaviorSubject<navigationItem[]>(
+    this.navRoutes('').children
+  );
   currentRoute$ = this.currentRouteSub.asObservable();
 
   isNavigating = true;
@@ -80,7 +96,7 @@ export class AppComponent {
   _helpBaseUrl = 'https://www.teradata.com/product-help/';
   readonly USE_CASES_ID: string = 'bkm1640280721917';
 
-  items:IMarkdownNavigatorItem[] = [
+  items: IMarkdownNavigatorItem[] = [
     {
       id: 'covalent',
       title: 'Covalent',
@@ -115,58 +131,70 @@ export class AppComponent {
     private nav: NavigationService,
     private cdr: ChangeDetectorRef,
     private markdownNavigatorWindowService: TdMarkdownNavigatorWindowService,
-    private _httpClient: HttpClient,
-    ) {}
+    private _httpClient: HttpClient
+  ) {
+    const onNavigationEnd$ = this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      takeUntilDestroyed()
+    );
+    onNavigationEnd$.subscribe((event) => {
+      const { url } = event as NavigationEnd;
+      if (!url) {
+        return;
+      }
+      this.setContainedPage(url);
+    });
+
+    combineLatest([onNavigationEnd$, this.nav.navTitle$])
+      .pipe(takeUntilDestroyed())
+      .subscribe(([event, navTitle]) => {
+        this.sectionName = navTitle.sectionName;
+        this.sectionParentName = navTitle.name;
+        this.sectionParentRoute = navTitle.route;
+
+        const { url } = event as NavigationEnd;
+
+        if (!url) {
+          return;
+        }
+
+        this.setCurrentRoute(url);
+      });
+
+    this.getHelpJSON().subscribe({
+      next: (items: IMarkdownNavigatorItem[]) => {
+        this.items = items;
+      },
+    });
+  }
 
   ngOnInit(): void {
     // Set the forced open state based on local storage preference
-    this.forcedOpen = JSON.parse(localStorage.getItem('app-preference-open') || 'false');
-
-    const onNavigationEnd$ = this.router.events.pipe(filter( event => event instanceof NavigationEnd), takeUntilDestroyed());
-
-    onNavigationEnd$.subscribe((event)=>{
-      const {url} = (event as NavigationEnd);
-      if (!url){return;}
-      this.setContainedPage(url);
-    })
-
-    combineLatest([
-      onNavigationEnd$,
-      this.nav.navTitle$,
-    ]).pipe(takeUntilDestroyed()).subscribe(( [event, navTitle] ) => {
-      this.sectionName = navTitle.sectionName;
-      this.sectionParentName = navTitle.name;
-      this.sectionParentRoute = navTitle.route;
-
-      const {url} = (event as NavigationEnd);
-
-      if (!url){return;}
-
-      this.setCurrentRoute(url);
-    });
-
-    this.getHelpJSON()
-    .subscribe({
-      next: (items: IMarkdownNavigatorItem[]) => {
-        this.items = items;
-      }
-    });    
+    this.forcedOpen = JSON.parse(
+      localStorage.getItem('app-preference-open') || 'false'
+    );
   }
 
   ngAfterViewInit(): void {
-    this.helpToggleItem.nativeElement.addEventListener('click', () => this.toggleHelp())
-    this.helpCloseButton.nativeElement.addEventListener('click', () => this.toggleHelp())
-    this.helpUndockButton.nativeElement.addEventListener('click', () => this.toggleDockedMode())
+    this.helpToggleItem.nativeElement.addEventListener('click', () =>
+      this.toggleHelp()
+    );
+    this.helpCloseButton.nativeElement.addEventListener('click', () =>
+      this.toggleHelp()
+    );
+    this.helpUndockButton.nativeElement.addEventListener('click', () =>
+      this.toggleDockedMode()
+    );
   }
 
   setContainedPage(url: string) {
     // List of page URLs that should NOT show the contained state
     const barePages = ['/', '/environments/*'];
     let mainSectionContained = true;
-    
-    for(let i=0; i<barePages.length;i++) {
-      // Match the array of patterns to their 
-      if(minimatch(url, barePages[i])) {
+
+    for (let i = 0; i < barePages.length; i++) {
+      // Match the array of patterns to their
+      if (minimatch(url, barePages[i])) {
         mainSectionContained = false;
         break;
       }
@@ -176,34 +204,34 @@ export class AppComponent {
     this.cdr.markForCheck();
   }
 
-  setCurrentRoute(url: string){
+  setCurrentRoute(url: string) {
     const nextRoute = this.navRoutes(url);
-    
+
     if (nextRoute.showSectionTitle === false) {
       this.sectionParentName = '';
     }
 
     this.currentRoute = nextRoute.children;
-    this.currentRouteSub.next(nextRoute.children);    
+    this.currentRouteSub.next(nextRoute.children);
     this.cdr.detectChanges();
   }
 
   navRoutes(url: string): navMapItem {
-    const navMap:  {[key: string]: navMapItem} = {
-      'home': {
+    const navMap: { [key: string]: navMapItem } = {
+      home: {
         path: '/**',
         showSectionTitle: false,
         children: [
           {
             path: '/',
             icon: 'home',
-            label: 'Home'
+            label: 'Home',
           },
           {
             path: '/editor',
             icon: 'product_editor',
             covalentIcon: true,
-            label: 'Editor'
+            label: 'Editor',
           },
           {
             path: '/environments',
@@ -216,48 +244,48 @@ export class AppComponent {
             children: [
               {
                 path: '/monitor',
-                label: 'Overview'
+                label: 'Overview',
               },
               {
                 path: '/monitor/queries',
-                label: 'Queries'
+                label: 'Queries',
               },
               {
                 path: '/monitor/consumption',
-                label: 'Consumption'
+                label: 'Consumption',
               },
               {
                 path: '/monitor/cost-calculator',
-                label: 'Cost calculator'
+                label: 'Cost calculator',
               },
               {
                 path: '/monitor/alerts',
-                label: 'Alerts'
+                label: 'Alerts',
               },
-            ]
+            ],
           },
           {
-            label: "Access management",
+            label: 'Access management',
             path: '/access-management',
-            icon: "person",
+            icon: 'person',
             children: [
               {
                 path: 'access-management',
-                label: 'Organization Admins'
+                label: 'Organization Admins',
               },
               {
                 path: '/access-management/identity-providers',
-                label: 'Identity providers'
+                label: 'Identity providers',
               },
               {
                 path: '/access-management/realms',
-                label: 'Realms'
+                label: 'Realms',
               },
               {
                 path: '/access-management/token-access',
-                label: 'Token access'
+                label: 'Token access',
               },
-            ]
+            ],
           },
           {
             label: 'Data management',
@@ -266,104 +294,104 @@ export class AppComponent {
             children: [
               {
                 path: '/data-management/overview',
-                label: 'Overview'
+                label: 'Overview',
               },
               {
                 path: '/data-management/data-copy',
-                label: 'Data copy'
+                label: 'Data copy',
               },
               {
                 path: '/data-management/data-migration',
-                label: 'Data migration'
+                label: 'Data migration',
               },
               {
                 path: '/data-management/flows',
-                label: 'Flows'
+                label: 'Flows',
               },
-            ]
+            ],
           },
-        ]
+        ],
       },
-      'environments': {
+      environments: {
         path: '/environments/**',
         children: [
           {
             path: ['/environments', this.sectionName],
             icon: 'language',
-            label: this.sectionName
+            label: this.sectionName,
           },
           {
             path: ['/environments', this.sectionName, 'users'],
             icon: 'nearby',
-            label: 'Users'
+            label: 'Users',
           },
           {
             path: ['/environments', this.sectionName, 'compute-groups'],
             icon: 'nearby',
-            label: 'Compute groups'
+            label: 'Compute groups',
           },
           {
             path: ['/environments', this.sectionName, 'backups'],
             icon: 'nearby',
-            label: 'Backups'
+            label: 'Backups',
           },
           {
             path: ['/environments', this.sectionName, 'query-grid'],
             icon: 'nearby',
-            label: 'QueryGrid'
+            label: 'QueryGrid',
           },
-        ]
+        ],
       },
-      'consumption': {
+      consumption: {
         path: '/monitor/consumption/**',
         children: [
           {
             path: ['monitor', 'consumption', this.sectionName],
             icon: 'language',
-            label: this.sectionName
+            label: this.sectionName,
           },
-        ]
+        ],
       },
-    }
+    };
     const navMatches = [];
 
     for (const navKey in navMap) {
       const nav = navMap[navKey];
-      if (minimatch(url, nav.path)){
-        navMatches.push(nav)
+      if (minimatch(url, nav.path)) {
+        navMatches.push(nav);
       }
     }
-    
+
     return navMatches.pop() ?? navMap['home'];
   }
 
-  checkActive(path: string| any[] = []) {
+  checkActive(path: string | any[] = []) {
     if (typeof path === 'string') {
-      return this.router.isActive(path, true) ? true : null
+      return this.router.isActive(path, true) ? true : null;
     } else {
-      return this.router.isActive(path?.join('/'), true) ? true : null
-    }   
+      return this.router.isActive(path?.join('/'), true) ? true : null;
+    }
   }
 
   checkActiveChildren(children: navigationItem[] = []) {
     let isActive = false;
-    for (let i=0; i < children.length; i++) {
+    for (let i = 0; i < children.length; i++) {
       let itemPath = children[i]?.path;
       if (itemPath) {
         let isActive = this.checkActive(itemPath);
         if (isActive) {
-          return isActive ?  true : null;
+          return isActive ? true : null;
         }
       }
     }
-    return isActive ?  true : null;    
+    return isActive ? true : null;
   }
 
-  toggleHelp () {
+  toggleHelp() {
     this.helpOpen = !this.helpOpen;
-    
+
     if (!this.helpDocked) {
-      this.toggleHelpWindow()
+      this.toggleHelpWindow();
     }
 
     this.cdr.markForCheck();
@@ -377,14 +405,16 @@ export class AppComponent {
     if (this.markdownNavigatorWindowService.isOpen) {
       this.markdownNavigatorWindowService.close();
     } else {
-      this.helpDialog = this.markdownNavigatorWindowService.open({ items: this.items });
+      this.helpDialog = this.markdownNavigatorWindowService.open({
+        items: this.items,
+      });
 
-      this.helpDialog.componentInstance.dockToggled.subscribe(()=>{
+      this.helpDialog.componentInstance.dockToggled.subscribe(() => {
         this.markdownNavigatorWindowService.close();
         this.helpDocked = true;
         this.helpOpen = true;
         this.cdr.markForCheck();
-      })
+      });
     }
   }
 
@@ -392,7 +422,7 @@ export class AppComponent {
     this.helpDocked = !this.helpDocked;
 
     if (!this.helpDocked) {
-      this.toggleHelpWindow()
+      this.toggleHelpWindow();
     }
     this.cdr.markForCheck();
   }
@@ -417,10 +447,12 @@ export class AppComponent {
 
   menuToggled() {
     this.forcedOpen = !this.forcedOpen;
-    localStorage.setItem('app-preference-open', this.forcedOpen.toString())
+    localStorage.setItem('app-preference-open', this.forcedOpen.toString());
   }
-  
-  getHelpJSON(fileName = 'Vantage/base-help-en.json'): Observable<IMarkdownNavigatorItem[]> {
+
+  getHelpJSON(
+    fileName = 'Vantage/base-help-en.json'
+  ): Observable<IMarkdownNavigatorItem[]> {
     const target = `${this._helpBaseUrl}${fileName}`;
     const src = this._httpClient.get(target);
 

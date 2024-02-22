@@ -169,7 +169,8 @@
           </cv-tab-bar>
           <cv-icon-button
             slot="actionItems"
-            icon="open_in_browser"
+            covalent-icons
+            icon="undock"
             #helpUndockButton
           ></cv-icon-button>
           <cv-icon-button
@@ -179,7 +180,7 @@
             #helpCloseButton
           ></cv-icon-button>
         </cv-toolbar>
-        <td-markdown-navigator [items]="items"></td-markdown-navigator>
+        <td-markdown-navigator [items]="items" class="markdown-help"></td-markdown-navigator>
       </div>
 
       <router-outlet></router-outlet>
