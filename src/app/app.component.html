@@ -1,6 +1,6 @@
 <cv-app-shell
   appName="Vantage Cloud Lake"
-  [sectionName]="sectionParentName"
+
   [helpOpen]="helpOpen && helpDocked"
   (:CovalentAppShell:menuClick)="menuToggled()"
   [forcedOpen]="forcedOpen"
@@ -24,7 +24,7 @@
         <path d="M98.5296 18.0588C98.5296 16.9943 99.3451 16.1551 100.407 16.1551C101.468 16.1551 102.284 16.9943 102.284 18.0588C102.284 19.1233 101.441 19.9907 100.407 19.9907C99.3725 19.9907 98.5296 19.1233 98.5296 18.0588Z"/>
       </svg>
 
-      <cv-icon-button slot="section-action" icon="arrow_back" [routerLink]="sectionParentRoute" ></cv-icon-button>
+
       
       <cv-list class="navigation-rail" slot="navigation" [@routeAnimation]="isNavigating" activatable>
         <ng-container *ngFor="let navRoute of currentRouteSub | async"  >
@@ -62,98 +62,13 @@
             </cv-nav-list-item>
           </ng-template>
         </ng-container>
-        
-        
-        <!-- <ng-container *ngIf="(navId$  | async) === 'home' else environmentsNav">
-
-          <cv-nav-list-item graphic="avatar" [routerLink]="['']" [routerLinkActive]="['selected']">
-            <cv-icon class="home-icon" slot="graphic">home</cv-icon>
-            Home
-          </cv-nav-list-item>
-  
-          <cv-expansion-list graphic="avatar" activatable>
-            <span>
-              Editor
-            </span>
-
-              <cv-icon class="covalent-icon" slot="graphic"
-                >product_editor</cv-icon
-              >
-            <cv-list class="subnav" slot="expansion-panel">
-              <cv-nav-list-item>Scripts</cv-nav-list-item>
-              <cv-nav-list-item>Scripts</cv-nav-list-item>
-              <cv-nav-list-item>Scripts</cv-nav-list-item>
-              <cv-nav-list-item>Scripts</cv-nav-list-item>
-              <cv-nav-list-item>Scripts</cv-nav-list-item>
-            </cv-list>
-          </cv-expansion-list>
-  
-          <cv-nav-list-item graphic="avatar" [routerLink]="['/environments']" [routerLinkActive]="['selected']">
-            <span>Environments</span>
-            <cv-icon class="covalent-icon" slot="graphic">server</cv-icon>
-          </cv-nav-list-item>
-          <cv-nav-list-item graphic="avatar" [routerLink]="['data-protections']" [routerLinkActive]="['selected']">
-            <span>Data Protections</span>
-            <cv-icon slot="graphic">settings_backup_restore</cv-icon>
-          </cv-nav-list-item>
-          <cv-nav-list-item graphic="avatar">
-            <span>Identity</span>
-            <cv-icon slot="graphic">contacts</cv-icon>
-          </cv-nav-list-item>
-
-        </ng-container>
-        
-        
-
-        <ng-template #environmentsNav>
-
-          <ng-container *ngIf="(sectionName$ | async) as sectionName">
-            <cv-icon-button slot="section-action" icon="arrow_back" [routerLink]="['/environments']" ></cv-icon-button>
-
-            <cv-nav-list-item graphic="avatar"  [routerLink]="['/environments', sectionName]" >
-              <cv-icon class="home-icon" slot="graphic">language</cv-icon>
-              {{ sectionName }}
-              <cv-icon-button
-                class="section-selector"
-                icon="arrow_drop_down"
-              ></cv-icon-button>
-            </cv-nav-list-item>  
-            <cv-nav-list-item
-              graphic="avatar"
-              [routerLink]="['/environments', sectionName, 'compute-groups']"
-              [routerLinkActive]="['selected']"
-              [attr.activated]="router.isActive(['/environments', sectionName, 'compute-groups'].join('/'), true) ? true : null"
-            >
-              <span>Compute groups</span>
-              <cv-icon class="covalent-icon" slot="graphic">server</cv-icon>
-            </cv-nav-list-item>
-            <cv-nav-list-item graphic="avatar" [routerLink]="['/environments', sectionName, 'queries']">
-              <span>Queries</span>
-              <cv-icon class="covalent-icon" slot="graphic">server</cv-icon>
-            </cv-nav-list-item>
-            <cv-expansion-list graphic="avatar" activatable>
-              <span>Query grid</span>
-              <cv-icon class="covalent-icon" slot="graphic"
-                  >product_editor</cv-icon
-                >
-              <cv-list class="subnav" slot="expansion-panel">
-                <cv-nav-list-item>Scripts</cv-nav-list-item>
-                <cv-nav-list-item>Scripts</cv-nav-list-item>
-                <cv-nav-list-item>Scripts</cv-nav-list-item>
-                <cv-nav-list-item>Scripts</cv-nav-list-item>
-                <cv-nav-list-item>Scripts</cv-nav-list-item>
-              </cv-list>
-    
-            </cv-expansion-list>
-          </ng-container>    
-        </ng-template> -->
       </cv-list>
 
       <cv-toolbar slot="user-menu" no-divider>
         <span slot="title" >
         <app-global-switcher-overlay-list-component></app-global-switcher-overlay-list-component>
       </span>
-        <cv-button color="primary" raised style="margin: 0 16px 0 0" slot="actionItems" covalent-icons icon="product_editor">SQL editor</cv-button>
+        <cv-button color="secondary" outlined style="margin: 0 16px 0 0" slot="actionItems" covalent-icons icon="product_editor">SQL editor</cv-button>
         <cv-textfield slot="actionItems" icon="forum" placeholder="Message ask.ai" dense></cv-textfield>
         <cv-icon-button slot="actionItems" icon="notifications"></cv-icon-button>
         <cv-icon-button slot="actionItems" icon="help" (:click)="toggleHelp()"></cv-icon-button>
