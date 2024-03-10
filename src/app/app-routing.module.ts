@@ -55,6 +55,7 @@ const routes: Routes = [
         path: '',
         component: EnvironmentsComponent,
       },
+
       {
         path: ':id',
         component: EnvironmentComponent,
@@ -68,15 +69,32 @@ const routes: Routes = [
             component: UsersComponent,
           },
           {
-            path: 'backups',
-            component: BackupsComponent,
-          },
-          {
             path: 'compute-groups',
             component: ComputeGroupsComponent,
           },
           {
+            path: 'backups',
+            component: BackupsComponent,
+          },
+          {
+            path: 'data-copy',
+            component: BackupsComponent,
+          },
+          {
+            path: 'data-migration',
+            component: BackupsComponent,
+          },
+          {
+            path: 'flows',
+            component: BackupsComponent,
+          },
+
+          {
             path: 'query-grid',
+            component: QueryGridComponent,
+          },
+          {  
+            path: 'settings',
             component: QueryGridComponent,
           },
         ],

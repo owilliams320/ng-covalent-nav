@@ -195,6 +195,26 @@ export class AppComponent {
     this.cdr.detectChanges();
   }
 
+  supportRoutes = {
+    label: 'Docs & support',
+    icon: 'school',
+
+    children: [
+      {
+        path: '/learn',
+        label: 'Learn',
+      },
+      {
+        path: '/documentation',
+        label: 'Documentation',
+      },
+      {
+        path: '/support',
+        label: 'Support',
+      },
+    ],
+  };
+
   navRoutes(url: string): navMapItem {
     const navMap: { [key: string]: navMapItem } = {
       home: {
@@ -203,28 +223,13 @@ export class AppComponent {
         children: [
           {
             path: '/',
-            icon: 'home',
-            label: 'Home',
-          },
-          {
-            path: '/editor',
-            icon: 'product_editor',
-            covalentIcon: true,
-            label: 'Editor',
-          },
-          {
-            path: '/environments',
-            label: 'Environments',
-            icon: 'language',
+            icon: 'dashboard',
+            label: 'Dashboard',
           },
           {
             label: 'Monitor',
-            icon: 'bar_chart',
+            icon: 'multiline_chart',
             children: [
-              {
-                path: '/monitor',
-                label: 'Overview',
-              },
               {
                 path: '/monitor/queries',
                 label: 'Queries',
@@ -246,19 +251,15 @@ export class AppComponent {
           {
             label: 'Access management',
             path: '/access-management',
-            icon: 'person',
+            icon: 'people',
             children: [
               {
                 path: 'access-management',
-                label: 'Organization Admins',
+                label: 'Users',
               },
               {
                 path: '/access-management/identity-providers',
                 label: 'Identity providers',
-              },
-              {
-                path: '/access-management/realms',
-                label: 'Realms',
               },
               {
                 path: '/access-management/token-access',
@@ -266,29 +267,7 @@ export class AppComponent {
               },
             ],
           },
-          {
-            label: 'Data management',
-            icon: 'data_management',
-            covalentIcon: true,
-            children: [
-              {
-                path: '/data-management/overview',
-                label: 'Overview',
-              },
-              {
-                path: '/data-management/data-copy',
-                label: 'Data copy',
-              },
-              {
-                path: '/data-management/data-migration',
-                label: 'Data migration',
-              },
-              {
-                path: '/data-management/flows',
-                label: 'Flows',
-              },
-            ],
-          },
+          {...this.supportRoutes},
         ],
       },
       environments: {
@@ -296,29 +275,54 @@ export class AppComponent {
         children: [
           {
             path: ['/environments', this.sectionName],
-            icon: 'language',
-            label: this.sectionName,
+            icon: 'dashboard',
+            label: 'Dashboard',
           },
           {
             path: ['/environments', this.sectionName, 'users'],
-            icon: 'nearby',
+            icon: 'people',
             label: 'Users',
           },
           {
             path: ['/environments', this.sectionName, 'compute-groups'],
-            icon: 'nearby',
+            icon: 'compute_cluster_group',
+            covalentIcon: true,
             label: 'Compute groups',
           },
           {
-            path: ['/environments', this.sectionName, 'backups'],
-            icon: 'nearby',
-            label: 'Backups',
+            path: ['/environments', this.sectionName, '**'],
+            icon: 'database',
+            label: 'Data management',
+            covalentIcon: true,
+            children: [
+              {
+                path: ['/environments', this.sectionName, 'backups'],
+                label: 'Backups',
+              },
+              {
+                path: ['/environments', this.sectionName, 'data-copy'],
+                label: 'Data copy',
+              },
+              {
+                path: ['/environments', this.sectionName, 'data-migration'],
+                label: 'Data migration',
+              },
+              {
+                path: ['/environments', this.sectionName, 'flows'],
+                label: 'Flows',
+              },
+              {
+                path: ['/environments', this.sectionName, 'query-grid'],
+                label: 'QueryGrid',
+              },
+            ],
           },
           {
-            path: ['/environments', this.sectionName, 'query-grid'],
-            icon: 'nearby',
-            label: 'QueryGrid',
+            path: ['/environments', this.sectionName, 'settings'],
+            icon: 'settings',
+            label: 'Settings',
           },
+          {...this.supportRoutes},
         ],
       },
       consumption: {

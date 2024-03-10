@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import '@covalent/components/action-ribbon';
 
 @Component({
@@ -11,9 +11,11 @@ export class EnvironmentOverviewComponent {
 
   sectionName!: string;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.sectionName = this.route.snapshot.paramMap.get('id') ?? '';
+    this.route.paramMap.subscribe((params) => {
+      this.sectionName = params.get('id') ?? '';
+    });
   }
 }

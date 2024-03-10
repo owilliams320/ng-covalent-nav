@@ -1,4 +1,13 @@
 .logo {
-    cursor: pointer;
-    outline: none;
+  cursor: pointer;
+  outline: none;
+}
+
+:host {
+  cv-button {
+    --mdc-theme-text-primary-on-background: #3053f4ff;
+  }
+  .secondary {
+    color: #484b5fff;
+  }
 }
