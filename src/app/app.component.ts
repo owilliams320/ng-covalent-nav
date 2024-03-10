@@ -139,6 +139,7 @@ export class AppComponent {
     combineLatest([onNavigationEnd$, this.nav.navTitle$])
       .pipe(takeUntilDestroyed())
       .subscribe(([event, navTitle]) => {
+        console.log(navTitle)
         this.sectionName = navTitle.sectionName;
         this.sectionParentName = navTitle.name;
         this.sectionParentRoute = navTitle.route;
@@ -164,6 +165,8 @@ export class AppComponent {
     this.forcedOpen = JSON.parse(
       localStorage.getItem('app-preference-open') || 'false'
     );
+
+ 
   }
   
   setContainedPage(url: string) {
@@ -195,7 +198,7 @@ export class AppComponent {
     this.cdr.detectChanges();
   }
 
-  supportRoutes = {
+  supportRoutes =           {
     label: 'Docs & support',
     icon: 'school',
 
@@ -267,8 +270,27 @@ export class AppComponent {
               },
             ],
           },
-          {...this.supportRoutes},
+          {
+            label: 'Docs & support',
+            icon: 'school',
+        
+            children: [
+              {
+                path: '/learn',
+                label: 'Learn',
+              },
+              {
+                path: '/documentation',
+                label: 'Documentation',
+              },
+              {
+                path: '/support',
+                label: 'Support',
+              },
+            ],
+          }
         ],
+        
       },
       environments: {
         path: '/environments/**',
@@ -276,7 +298,7 @@ export class AppComponent {
           {
             path: ['/environments', this.sectionName],
             icon: 'dashboard',
-            label: 'Dashboard',
+            label: 'Dashboard'
           },
           {
             path: ['/environments', this.sectionName, 'users'],
@@ -315,14 +337,14 @@ export class AppComponent {
                 path: ['/environments', this.sectionName, 'query-grid'],
                 label: 'QueryGrid',
               },
-            ],
+            ]
           },
           {
             path: ['/environments', this.sectionName, 'settings'],
             icon: 'settings',
             label: 'Settings',
           },
-          {...this.supportRoutes},
+          {...this.supportRoutes}
         ],
       },
       consumption: {
@@ -448,4 +470,6 @@ export class AppComponent {
       })
     );
   }
+
+
 }

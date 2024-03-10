@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { GlobalSwitcherItem, globalSwitcherItems } from '../mock-data/global-switcher';
+import { NavigationService } from '../navigation.service';
 
 
 
@@ -20,7 +21,8 @@ export class GlobalSwitcherOverlayListComponentComponent {
   constructor(
     private location: Location,
     private router: Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private nav: NavigationService
   ) {}
 
   onGlobalSelect(id?: string) {
@@ -42,6 +44,15 @@ export class GlobalSwitcherOverlayListComponentComponent {
     this.location.onUrlChange((url, ) => {
       if (url === '/') {
         this.selectedSwitcherItem = this.localGlobalSwitcherItems[0]
+      } else {
+        console.log(url, globalSwitcherItems)
+        
+        globalSwitcherItems.forEach((item) => {
+          if (url.includes(item.id)) {
+            this.nav.setNavTitle({name: item.name, route: item.url, sectionName: item.id});
+            this.selectedSwitcherItem = item;
+          }
+        });
       }
     })
   }

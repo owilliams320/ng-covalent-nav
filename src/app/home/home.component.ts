@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, ElementRef, HostBinding, ViewChild } from '@angular/core';
 import { slideInUpAnimation } from '../app.animations';
 
 import '@covalent/components/card';
@@ -12,5 +12,12 @@ import '@covalent/components/text-lockup';
   animations:[ slideInUpAnimation ]
 })
 export class HomeComponent {
-  @HostBinding('@routeAnimation') routeAnimation = false;  
+  @HostBinding('@routeAnimation') routeAnimation = false;
+
+  @ViewChild('createNewMenu') createNewMenu?: ElementRef;
+  
+  onCreateNew() {
+    this.createNewMenu?.nativeElement?.setAttribute('open', '');
+  }
+
 }
