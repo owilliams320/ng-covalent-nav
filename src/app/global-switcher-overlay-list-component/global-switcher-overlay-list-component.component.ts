@@ -1,10 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { GlobalSwitcherItem, globalSwitcherItems } from '../mock-data/global-switcher';
+import {
+  GlobalSwitcherItem,
+  globalSwitcherItems,
+} from '../mock-data/global-switcher';
 import { NavigationService } from '../navigation.service';
-
-
 
 @Component({
   selector: 'app-global-switcher-overlay-list-component',
@@ -37,23 +38,28 @@ export class GlobalSwitcherOverlayListComponentComponent {
   }
 
   ngOnInit() {
-    this.selectedSwitcherItem = this.localGlobalSwitcherItems.find((item: GlobalSwitcherItem) => {
+    this.selectedSwitcherItem = this.localGlobalSwitcherItems.find(
+      (item: GlobalSwitcherItem) => {
         return item.url === this.location.path();
-    });
+      }
+    );
 
-    this.location.onUrlChange((url, ) => {
-      if (url === '/') {
-        this.selectedSwitcherItem = this.localGlobalSwitcherItems[0]
-      } else {
-        console.log(url, globalSwitcherItems)
+    this.location.onUrlChange((url) => {
+      this.selectedSwitcherItem = this.localGlobalSwitcherItems[0];
+      if (url !== '/') {
         
         globalSwitcherItems.forEach((item) => {
           if (url.includes(item.id)) {
-            this.nav.setNavTitle({name: item.name, route: item.url, sectionName: item.id});
+            this.nav.setNavTitle({
+              name: item.name,
+              route: item.url,
+              sectionName: item.id,
+            });
             this.selectedSwitcherItem = item;
           }
         });
+        return;
       }
-    })
+    });
   }
 }

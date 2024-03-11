@@ -28,6 +28,11 @@ import { QueryGridComponent } from './environment/query-grid/query-grid.componen
 import { CostCalculatorComponent } from './monitor/cost-calculator/cost-calculator.component';
 import { UsersComponent } from './environment/users/users.component';
 import { AlertsComponent } from './alerts/alerts.component';
+import { CreateEnvironmentComponent } from './environments/create-environment.component';
+import { CreateUsersComponent } from './create-users/create-users.component';
+import { IdPListComponent } from './id-plist/id-plist.component';
+import { AccessTokensComponent } from './access-tokens/access-tokens.component';
+
 
 const titlePrefix = 'Vantage cloud lake |';
 
@@ -37,6 +42,28 @@ const routes: Routes = [
     title: `${titlePrefix} Home`,
     component: HomeComponent,
   },
+    {
+      path: 'access-management',
+      title: "Access management",
+      children: [
+        {
+        path: 'users',
+        component: UsersComponent,
+      },
+      {
+        path: 'users/create',
+        component: CreateUsersComponent,
+      },
+      {
+        path: 'identity-providers',
+        component: IdPListComponent
+      },
+      {
+        path: 'access-tokens',
+        component: AccessTokensComponent
+      }
+      ]
+    },
   {
     path: 'data-catalog',
     title: `${titlePrefix} Data catalog`,
@@ -55,7 +82,10 @@ const routes: Routes = [
         path: '',
         component: EnvironmentsComponent,
       },
-
+      {
+        path: 'create',
+        component: CreateEnvironmentComponent,
+      },
       {
         path: ':id',
         component: EnvironmentComponent,
@@ -105,24 +135,6 @@ const routes: Routes = [
     path: 'editor',
     title: `${titlePrefix} Editor`,
     component: EditorComponent,
-  },
-  {
-    path: 'admin',
-    title: `${titlePrefix} Admin`,
-    children: [
-      {
-        path: 'data',
-        component: AdminDataComponent
-      },
-      {
-        path: 'access-management',
-        component: AdminAccessManagementComponent
-      },
-      {
-        path: 'environments',
-        component: AdminEnvironmentsComponent
-      }
-    ]
   },
   {
     path: 'monitor',

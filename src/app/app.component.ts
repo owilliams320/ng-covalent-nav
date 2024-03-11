@@ -79,9 +79,10 @@ export class AppComponent {
   sectionParentRoute?: string;
   forcedOpen!: boolean;
 
-  helpOpen = false;
+  helpOpen = true;
   helpDocked = true;
   mainSectionContained = true;
+  disableEditor = false;
 
   helpDialog?: MatDialogRef<TdMarkdownNavigatorWindowComponent>;
 
@@ -133,13 +134,14 @@ export class AppComponent {
       if (!url) {
         return;
       }
+      console.log(url)
+      this.disableEditor = url === '/editor' ? true : false;
       this.setContainedPage(url);
     });
 
     combineLatest([onNavigationEnd$, this.nav.navTitle$])
       .pipe(takeUntilDestroyed())
       .subscribe(([event, navTitle]) => {
-        console.log(navTitle)
         this.sectionName = navTitle.sectionName;
         this.sectionParentName = navTitle.name;
         this.sectionParentRoute = navTitle.route;
@@ -257,7 +259,7 @@ export class AppComponent {
             icon: 'people',
             children: [
               {
-                path: 'access-management',
+                path: '/access-management/users',
                 label: 'Users',
               },
               {
@@ -265,8 +267,8 @@ export class AppComponent {
                 label: 'Identity providers',
               },
               {
-                path: '/access-management/token-access',
-                label: 'Token access',
+                path: '/access-management/access-tokens',
+                label: 'Access tokens',
               },
             ],
           },
