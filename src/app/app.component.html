@@ -157,7 +157,7 @@
         
         <cv-textfield slot="actionItems" icon="forum" placeholder="Message ask.ai" dense></cv-textfield>
         <cv-icon-button slot="actionItems" icon="notifications"></cv-icon-button>
-        <cv-icon-button slot="actionItems" icon="help" class="help-item" #helpToggleItem></cv-icon-button>
+        <cv-icon-button slot="actionItems" icon="help" (:click)="toggleHelp()"></cv-icon-button>
         <cv-icon-button slot="actionItems" icon="person"></cv-icon-button>
        </cv-toolbar>
 
@@ -171,13 +171,13 @@
             slot="actionItems"
             covalent-icons
             icon="undock"
-            #helpUndockButton
+            (:click)="toggleDockedMode()"
           ></cv-icon-button>
           <cv-icon-button
             slot="actionItems"
             icon="close"
             class="help-close"
-            #helpCloseButton
+            (:click)="toggleHelp()"
           ></cv-icon-button>
         </cv-toolbar>
         <td-markdown-navigator [items]="items" class="markdown-help"></td-markdown-navigator>
