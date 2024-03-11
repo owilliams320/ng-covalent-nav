@@ -15,21 +15,16 @@
     ></cv-button>
   </div>
   <cv-menu #createNewMenu>
-    <cv-list-item  style="width: 300px;">
+    <cv-list-item [routerLink]="['/environments', 'create']"  style="width: 300px;">
       <div class="select-container" >
           Create environment
           </div>
       </cv-list-item>
-    <cv-list-item  style="width: 300px;">
+    <cv-list-item [routerLink]="['/access-management/users/create']"  style="width: 300px;">
     <div class="select-container" >
         Create users
         </div>
     </cv-list-item>
-    <cv-list-item  style="width: 300px;">
-      <div class="select-container" >
-          Create compute profile
-          </div>
-      </cv-list-item>
     <cv-list-item  style="width: 300px;">
       <div class="select-container" >
           Create backup

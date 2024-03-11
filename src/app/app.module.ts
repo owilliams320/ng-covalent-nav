@@ -37,6 +37,12 @@ import { CostCalculatorComponent } from './monitor/cost-calculator/cost-calculat
 import { UsersComponent } from './environment/users/users.component';
 import { GlobalSwitcherListComponent } from './global-switcher-list/global-switcher-list.component';
 import { GlobalSwitcherOverlayListComponentComponent } from './global-switcher-overlay-list-component/global-switcher-overlay-list-component.component';
+import { CreateUsersComponent } from './create-users/create-users.component';
+import { CreateEnvironmentComponent } from './environments/create-environment.component';
+import { CreateComputeComponent } from './create-compute/create-compute.component';
+import { IdPListComponent } from './id-plist/id-plist.component';
+import { AccessTokensComponent } from './access-tokens/access-tokens.component';
+import { AlertsComponent } from './alerts/alerts.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +76,12 @@ import { GlobalSwitcherOverlayListComponentComponent } from './global-switcher-o
     UsersComponent,
     GlobalSwitcherOverlayListComponentComponent,
     GlobalSwitcherListComponent,
-
+    CreateEnvironmentComponent,
+    CreateUsersComponent,
+    CreateComputeComponent,
+    IdPListComponent,
+    AccessTokensComponent,
+    AlertsComponent
   ],
   imports: [
     BrowserModule,

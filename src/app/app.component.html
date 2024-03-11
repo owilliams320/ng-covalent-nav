@@ -1,6 +1,5 @@
 <cv-app-shell
   appName="Vantage Cloud Lake"
-
   [helpOpen]="helpOpen && helpDocked"
   (:CovalentAppShell:menuClick)="menuToggled()"
   [forcedOpen]="forcedOpen"
@@ -24,45 +23,57 @@
         <path d="M98.5296 18.0588C98.5296 16.9943 99.3451 16.1551 100.407 16.1551C101.468 16.1551 102.284 16.9943 102.284 18.0588C102.284 19.1233 101.441 19.9907 100.407 19.9907C99.3725 19.9907 98.5296 19.1233 98.5296 18.0588Z"/>
       </svg>
 
+  <cv-list
+    class="navigation-rail"
+    slot="navigation"
+    [@routeAnimation]="isNavigating"
+    activatable
+  >
+    <ng-container *ngFor="let navRoute of currentRouteSub | async">
+      <cv-nav-list-item
+        graphic="avatar"
+        *ngIf="!navRoute.children; else expansionItem"
+        [attr.activated]="checkActive(navRoute.path)"
+        [attr.selected]="checkActive(navRoute.path)"
+        [routerLink]="navRoute.path"
+      >
+        <cv-icon
+          slot="graphic"
+          [ngClass]="{ 'covalent-icon': navRoute.covalentIcon }"
+          >{{ navRoute.icon }}</cv-icon
+        >
+        {{ navRoute.label }}
+      </cv-nav-list-item>
 
-      
-      <cv-list class="navigation-rail" slot="navigation" [@routeAnimation]="isNavigating" activatable>
-        <ng-container *ngFor="let navRoute of currentRouteSub | async"  >
+      <ng-template #expansionItem>
+        <cv-nav-list-item
+          graphic="avatar"
+          hasChildren
+          [attr.open]="checkActiveChildren(navRoute.children)"
+        >
+          <span>
+            {{ navRoute.label }}
+          </span>
 
-          <cv-nav-list-item
-            graphic="avatar"
-            *ngIf="!navRoute.children else expansionItem" 
-            [attr.activated]="checkActive(navRoute.path)"
-            [attr.selected]="checkActive(navRoute.path)"
-            [routerLink]="navRoute.path"
+          <cv-icon
+            slot="graphic"
+            [ngClass]="{ 'covalent-icon': navRoute.covalentIcon }"
+            >{{ navRoute.icon }}</cv-icon
           >
-            <cv-icon slot="graphic" [ngClass]="{'covalent-icon' : navRoute.covalentIcon}">{{ navRoute.icon }}</cv-icon>
-            {{navRoute.label}}
-          </cv-nav-list-item>
-
-          <ng-template #expansionItem>
+          <cv-list class="subnav" slot="expansion-panel">
             <cv-nav-list-item
-            graphic="avatar"
-            hasChildren
-            [attr.open]="checkActiveChildren(navRoute.children)">
-              <span>
-                {{navRoute.label}}
-              </span>
-  
-              <cv-icon slot="graphic" [ngClass]="{'covalent-icon' : navRoute.covalentIcon}">{{navRoute.icon}}</cv-icon>
-              <cv-list class="subnav" slot="expansion-panel">
-                <cv-nav-list-item
-                  *ngFor="let subNavRoute of navRoute.children"
-                  [routerLink]="subNavRoute.path"
-                  [attr.activated]="checkActive(subNavRoute.path)"
-                  [attr.selected]="checkActive(subNavRoute.path)">
-                  {{subNavRoute.label}}
-                </cv-nav-list-item>
-              </cv-list>
+              *ngFor="let subNavRoute of navRoute.children"
+              [routerLink]="subNavRoute.path"
+              [attr.activated]="checkActive(subNavRoute.path)"
+              [attr.selected]="checkActive(subNavRoute.path)"
+            >
+              {{ subNavRoute.label }}
             </cv-nav-list-item>
-          </ng-template>
-        </ng-container>
-      </cv-list>
+          </cv-list>
+        </cv-nav-list-item>
+      </ng-template>
+    </ng-container>
+  </cv-list>
 
       <cv-toolbar slot="user-menu" no-divider>
         <span slot="title" >
@@ -97,16 +108,15 @@
         <td-markdown-navigator [items]="items" class="markdown-help"></td-markdown-navigator>
       </div>
 
-      <router-outlet></router-outlet>
-      
-    </cv-app-shell>
+  <router-outlet></router-outlet>
+</cv-app-shell>
 
-    <cv-menu absolute id="section-menu">
-      <cv-list-item>Production</cv-list-item>
-      <cv-list-item>Development</cv-list-item>
-    </cv-menu>
+<cv-menu absolute id="section-menu">
+  <cv-list-item>Production</cv-list-item>
+  <cv-list-item>Development</cv-list-item>
+</cv-menu>
 
-    <!-- <script>
+<!-- <script>
       var appShell = document.querySelector('cv-app-shell');
       var sectionMenu = document.querySelector('#section-menu');
       var sectionSelector = document.querySelector('.section-selector');

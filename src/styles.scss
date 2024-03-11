@@ -132,3 +132,13 @@ $theme-light: $td-light-theme;
 .covalent-icon, .covalent-icons, [covalent-icon], [covalent-icons] {
   --mdc-icon-font: "covalent-icons";
 }
+
+
+  cv-button {
+--mdc-theme-text-primary-on-background: #3053f4ff;
+// --mdc-theme-on-primary: #324369ff;
+  }
+
+  cv-toolbar {
+    margin-bottom: 24px;
+  }
