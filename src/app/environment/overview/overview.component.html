@@ -1,11 +1,47 @@
-<cv-toolbar>
-    <span slot="title">{{ sectionName }}</span>
-    <cv-icon-button slot="actionItems" icon="info"></cv-icon-button>
-    <cv-icon-button slot="actionItems" icon="more_vert"></cv-icon-button>
-</cv-toolbar>
+<div style="max-width: 1150px">
+  <cv-toolbar>
+    <span slot="title"
+      ><span class="environment-title">{{ sectionName }}</span>
+      environment</span
+    >
+    <cv-button
+    id="org-primary-cta"
+    label="Create new"
+    icon="arrow_drop_down"
+    slot="actionItems"
+    color="primary"
+    trailingIcon
+    raised
+    (click)="onCreateNew()"
+  ></cv-button>
+  </cv-toolbar>
+  <cv-menu #createNewMenu>
+    <cv-list-item [routerLink]="['/access-management/users/create']"   style="width: 300px;">
+      <div class="select-container" >
+          Users
+          </div>
+      </cv-list-item>
+    <cv-list-item [routerLink]="['/environments/' + sectionName + '/compute-groups/create']"  style="width: 300px;">
+    <div class="select-container" >
+        Compute profile
+        </div>
+    </cv-list-item>
+    <cv-list-item [routerLink]="['/environments/' + sectionName + '/backups/create']" style="width: 300px;">
+      <div class="select-container" >
+          Backup
+          </div>
+      </cv-list-item>
+  </cv-menu>
 
-<!-- <cv-action-ribbon labelText="this is my label" state="active">
+
+  <!-- <cv-action-ribbon labelText="this is my label" state="active">
     <cv-button slot="action-items" label="Bulk action" class="mdc-banner__secondary-action" outlined></cv-button>
 </cv-action-ribbon> -->
 
-<img src="assets/placeholder-content/environment.png" style="max-width: 1344px; width: 100%; margin: 0 auto; display: block;"/>
+  <img
+    src="assets/placeholder-content/environment.png"
+    style="width: 100%; margin: 0 auto; display: block"
+  />
+</div>
+
+

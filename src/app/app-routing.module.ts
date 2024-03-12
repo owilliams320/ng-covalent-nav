@@ -32,6 +32,9 @@ import { CreateEnvironmentComponent } from './environments/create-environment.co
 import { CreateUsersComponent } from './create-users/create-users.component';
 import { IdPListComponent } from './id-plist/id-plist.component';
 import { AccessTokensComponent } from './access-tokens/access-tokens.component';
+import { SettingsComponent } from './environment/settings/settings.component';
+import { CreateComputeComponent } from './create-compute/create-compute.component';
+import { CreateBackupComponent } from './environment/backups/create/create-backup.component';
 
 
 const titlePrefix = 'Vantage cloud lake |';
@@ -103,8 +106,16 @@ const routes: Routes = [
             component: ComputeGroupsComponent,
           },
           {
+            path: 'compute-groups/create',
+            component: CreateComputeComponent,
+          },
+          {
             path: 'backups',
             component: BackupsComponent,
+          },
+          {
+            path: 'backups/create',
+            component: CreateBackupComponent,
           },
           {
             path: 'data-copy',
@@ -125,7 +136,7 @@ const routes: Routes = [
           },
           {  
             path: 'settings',
-            component: QueryGridComponent,
+            component: SettingsComponent,
           },
         ],
       },

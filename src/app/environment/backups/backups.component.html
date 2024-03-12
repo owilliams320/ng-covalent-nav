@@ -1,8 +1,15 @@
-<cv-toolbar>
-    <span slot="title">Backups</span>
-    <cv-icon-button slot="actionItems" icon="menu_open"></cv-icon-button>
-    <cv-icon-button class="hidden-large" slot="actionItems" icon="add"></cv-icon-button>
-    <cv-button class="hidden-small" label="Create" slot="actionItems" outlined></cv-button>
-</cv-toolbar>
+<cv-card outlined>
+    <cv-toolbar>
+        <span slot="title">Backups</span>
+        <cv-tab-bar slot="actionItems">
+            <cv-tab label="Plans "> </cv-tab>
+            <cv-tab label="Restore points"> </cv-tab>
+            <cv-tab label="Restore jobs"> </cv-tab>
+          </cv-tab-bar>
+        <cv-button (:click)="onCreateBackup()"  color="primary"  class="hidden-small" label="Create backup" slot="actionItems" raised></cv-button>
+    </cv-toolbar>
+    <div style="padding: 0px 24px 24px 24px;" >
+        <img src="assets/placeholder-content/backups.png" style="max-width: 1320px; width: 100%; margin: 0 auto; display: block;"/>
+    </div>
 
-<img src="assets/placeholder-content/backups-history.png" style="width: 100%; margin: 0 auto; display: block;"/>
+</cv-card>
