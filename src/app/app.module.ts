@@ -43,6 +43,8 @@ import { CreateComputeComponent } from './create-compute/create-compute.componen
 import { IdPListComponent } from './id-plist/id-plist.component';
 import { AccessTokensComponent } from './access-tokens/access-tokens.component';
 import { AlertsComponent } from './alerts/alerts.component';
+import { EnvironmentSettingsComponent } from './environment-settings/environment-settings.component';
+import { CreateBackupComponent } from './environment/backups/create/create-backup.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,9 @@ import { AlertsComponent } from './alerts/alerts.component';
     CreateComputeComponent,
     IdPListComponent,
     AccessTokensComponent,
-    AlertsComponent
+    AlertsComponent,
+    EnvironmentSettingsComponent,
+    CreateBackupComponent
   ],
   imports: [
     BrowserModule,

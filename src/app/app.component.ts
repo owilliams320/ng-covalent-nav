@@ -173,8 +173,8 @@ export class AppComponent {
   
   setContainedPage(url: string) {
     // List of page URLs that should NOT show the contained state
-    const barePages = ['/', '/environments/*'];
-    let mainSectionContained = true;
+    const barePages = ['/', '/environments/*', '/environments/*/create'];
+    let mainSectionContained = false;
 
     for (let i = 0; i < barePages.length; i++) {
       // Match the array of patterns to their

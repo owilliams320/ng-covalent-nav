@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import '@covalent/components/action-ribbon';
 
 @Component({
@@ -11,7 +11,15 @@ export class EnvironmentOverviewComponent {
 
   sectionName!: string;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute) {}
+
+
+  @ViewChild('createNewMenu') createNewMenu?: ElementRef;
+  
+  onCreateNew() {
+    this.createNewMenu?.nativeElement?.setAttribute('open', '');
+  }
+
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {

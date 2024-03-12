@@ -1,7 +1,7 @@
 <div class="mdc-layout-grid">
   <div class="welcome-container">
     <cv-typography scale="headline5" class="welcome-headline"
-      >VantageCloud Lake Dashboard</cv-typography
+      >VantageCloud Lake dashboard</cv-typography
     >
     <cv-button
       id="org-primary-cta"
@@ -17,19 +17,14 @@
   <cv-menu #createNewMenu>
     <cv-list-item [routerLink]="['/environments', 'create']"  style="width: 300px;">
       <div class="select-container" >
-          Create environment
+          Environment
           </div>
       </cv-list-item>
     <cv-list-item [routerLink]="['/access-management/users/create']"  style="width: 300px;">
     <div class="select-container" >
-        Create users
+        Users
         </div>
     </cv-list-item>
-    <cv-list-item  style="width: 300px;">
-      <div class="select-container" >
-          Create backup
-          </div>
-      </cv-list-item>
   </cv-menu>
   <div class="mdc-layout-grid__inner">
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
