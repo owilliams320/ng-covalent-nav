@@ -116,15 +116,6 @@ export class AppComponent {
     },
   ];
 
-  @ViewChild('helpToggleItem')
-  helpToggleItem!: ElementRef;
-
-  @ViewChild('helpCloseButton')
-  helpCloseButton!: ElementRef;
-
-  @ViewChild('helpUndockButton')
-  helpUndockButton!: ElementRef;
-
   constructor(
     public router: Router,
     public activeRoute: ActivatedRoute,
@@ -174,19 +165,7 @@ export class AppComponent {
       localStorage.getItem('app-preference-open') || 'false'
     );
   }
-
-  ngAfterViewInit(): void {
-    this.helpToggleItem.nativeElement.addEventListener('click', () =>
-      this.toggleHelp()
-    );
-    this.helpCloseButton.nativeElement.addEventListener('click', () =>
-      this.toggleHelp()
-    );
-    this.helpUndockButton.nativeElement.addEventListener('click', () =>
-      this.toggleDockedMode()
-    );
-  }
-
+  
   setContainedPage(url: string) {
     // List of page URLs that should NOT show the contained state
     const barePages = ['/', '/environments/*'];
