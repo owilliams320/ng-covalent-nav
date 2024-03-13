@@ -2,17 +2,26 @@
 @use '@angular/material' as mat;
 @use '@material/layout-grid/mdc-layout-grid';
 @use '@material/data-table/data-table' as data-table;
-
-@import '../node_modules/@covalent/components/style.css';
-
-@import '../node_modules/@covalent/core/theming/all-theme';
-@import '../node_modules/@covalent/core/theming/teradata-theme';
-@import '../node_modules/@covalent/markdown/markdown-theme';
-@import '../node_modules/@covalent/highlight/highlight-theme';
-@import '../node_modules/@covalent/flavored-markdown/flavored-markdown-theme';
-@import '../node_modules/@covalent/markdown-navigator/markdown-navigator-theme';
-
+@use '@material/data-table/data-table-theme' as data-table-theme;
+@use '@covalent/tokens' as covalent-tokens;
+@use '@covalent/components' as covalent-theme;
+@use '@covalent/icons';
+@import '@covalent/core/theming/all-theme';
+@import '@covalent/core/theming/teradata-theme';
+@import '@covalent/markdown/markdown-theme';
+@import '@covalent/highlight/highlight-theme';
+@import '@covalent/flavored-markdown/flavored-markdown-theme';
+@import '@covalent/markdown-navigator/markdown-navigator-theme';
 @import './reset';
+
+$theme-tokens: map-get(covalent-tokens.$tokens, 'theme');
+$light-tokens: map-get($theme-tokens, 'light');
+$dark-tokens: map-get($theme-tokens, 'dark');
+$light-colors: map-get($light-tokens, 'colors');
+$dark-colors: map-get($dark-tokens, 'colors');
+// Merge new tokens with deprecated tokens
+$light-colors: map-merge($light-colors, map-get(covalent-tokens.$tokens, light));
+$dark-colors: map-merge($dark-colors, map-get(covalent-tokens.$tokens, dark));
 
 // Include the core styles for Covalent
 @include covalent-core();
@@ -54,6 +63,24 @@ $theme-light: $td-light-theme;
 @include covalent-markdown-navigator-theme($theme-light);
 @include covalent-markdown-navigator-typography($td-custom-typography);
 
+:root {
+  // Covalent web components theme
+  @include covalent-theme.components-theme(
+    $light-colors,
+    map-get(covalent-tokens.$tokens, typography)
+  );
+
+  --mat-table-background-color: transparent;
+  @include data-table-theme.stroke-size(0);
+  @include data-table-theme.divider-color(var(--cv-theme-divider));
+  @include data-table-theme.header-row-text-color(var(--cv-theme-on-surface));
+  @include data-table-theme.row-text-color(var(--cv-theme-on-surface));
+}
+
+body {
+  color: var(--cv-theme-on-surface);
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
 
 // Dark theme
 // @media (prefers-color-scheme: dark) {
@@ -128,17 +155,6 @@ $theme-light: $td-light-theme;
 [ng-reflect-router-link] {
   cursor: pointer;
 }
-
-.covalent-icon, .covalent-icons, [covalent-icon], [covalent-icons] {
-  --mdc-icon-font: "covalent-icons";
+cv-toolbar {
+  margin-bottom: 24px;
 }
-
-
-  cv-button {
---mdc-theme-text-primary-on-background: #3053f4ff;
-// --mdc-theme-on-primary: #324369ff;
-  }
-
-  cv-toolbar {
-    margin-bottom: 24px;
-  }
