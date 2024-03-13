@@ -28,7 +28,7 @@
   </cv-menu>
   <div class="mdc-layout-grid__inner">
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
-      <cv-card cardTitle="Recently viewed" outlined actionBar>
+      <cv-card cardTitle="Recently viewed" outlined actionBar fullHeight>
         <cv-list>
           <cv-list-item>
             <a routerLink="/learn">Docs & Support - Learn</a>
@@ -45,8 +45,8 @@
       </cv-card>
     </div>
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5">
-      <cv-card cardTitle="Common tasks" outlined actionBar>
-        <cv-list subNav>
+      <cv-card cardTitle="Common tasks" outlined actionBar fullHeight>
+        <cv-list >
           <cv-list-item
             [routerLink]="['environments', 'create']"
             graphic="avatar"
@@ -55,9 +55,9 @@
             twoLine
           >
             Create environment
-            <div slot="secondary">
+            <span slot="secondary">
               Step-by-step guide for creating environments
-            </div>
+            </span>
             <div slot="graphic"><cv-icon covalent-icon> server </cv-icon></div>
           </cv-list-item>
           <cv-list-item
@@ -68,9 +68,9 @@
             twoLine
           >
             Enable network access
-            <div slot="secondary">
+            <span slot="secondary">
               Allow other systems and tools to connect.
-            </div>
+            </span>
             <div slot="graphic"><cv-icon> network_locked </cv-icon></div>
           </cv-list-item>
           <cv-list-item
@@ -81,7 +81,7 @@
             twoLine
           >
             Add users
-            <div slot="secondary">Add users to a environment’s database.</div>
+            <span slot="secondary">Add users to a environment’s database.</span>
             <div slot="graphic"><cv-icon> people </cv-icon></div>
           </cv-list-item>
           <cv-list-item
@@ -92,9 +92,9 @@
             twoLine
           >
             Setup your identity provider
-            <div slot="secondary">
+            <span slot="secondary">
               Enable SSO for your organization and users.
-            </div>
+            </span>
             <div slot="graphic">
               <cv-icon covalent-icon> connected_identity </cv-icon>
             </div>
@@ -107,34 +107,34 @@
         <cv-list>
           <cv-list-item hasMeta twoLine>
             ACME
-            <div slot="secondary">Lake ID</div>
+            <span slot="secondary">Lake ID</span>
           </cv-list-item>
           <cv-list-item hasMeta twoLine>
             acme
-            <div slot="secondary">domain name</div>
+            <span slot="secondary">domain name</span>
           </cv-list-item>
           <cv-list-item hasMeta twoLine>
             ACME Lake for the Marketing org
-            <div slot="secondary">Description</div>
+            <span slot="secondary">Description</span>
           </cv-list-item>
           <cv-list-item hasMeta twoLine>
             aws
-            <div slot="secondary">Platform</div>
+            <span slot="secondary">Platform</span>
           </cv-list-item>
           <cv-list-item hasMeta twoLine>
             VLAMFAKEBK0009K
-            <div slot="secondary">Site ID</div>
+            <span slot="secondary">Site ID</span>
           </cv-list-item>
           <cv-list-item hasMeta twoLine>
             United States
-            <div slot="secondary">Regions</div>
+            <span slot="secondary">Regions</span>
           </cv-list-item>
         </cv-list>
       </cv-card>
     </div>
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
       <cv-card cardTitle="Environments" outlined actionBar>
-        <cv-list subNav>
+        <cv-list >
           <cv-list-item
             [routerLink]="['environments', 'production']"
             hasMeta
