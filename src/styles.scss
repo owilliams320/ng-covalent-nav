@@ -56,22 +56,22 @@ $theme-light: $td-light-theme;
 
 
 // Dark theme
-@media (prefers-color-scheme: dark) {
-  $theme-dark: $td-dark-theme;
+// @media (prefers-color-scheme: dark) {
+//   $theme-dark: $td-dark-theme;
 
-  @include mat.core-theme($theme-dark);
-  @include mat.all-component-themes($theme-dark);
-  @include covalent-theme($theme-dark);
-  @include covalent-markdown-theme($theme-dark);
-  @include covalent-highlight-theme($theme-dark);
-  @include covalent-flavored-markdown-theme($theme-dark);
-  @include covalent-markdown-navigator-theme($theme-dark);
+//   @include mat.core-theme($theme-dark);
+//   @include mat.all-component-themes($theme-dark);
+//   @include covalent-theme($theme-dark);
+//   @include covalent-markdown-theme($theme-dark);
+//   @include covalent-highlight-theme($theme-dark);
+//   @include covalent-flavored-markdown-theme($theme-dark);
+//   @include covalent-markdown-navigator-theme($theme-dark);
 
-  body {
-    color: #fff;
-    font-family: 'Inter', Arial, Helvetica, sans-serif;
-  }
-}
+//   body {
+//     color: #fff;
+//     font-family: 'Inter', Arial, Helvetica, sans-serif;
+//   }
+// }
 
 
 :root {
@@ -79,6 +79,7 @@ $theme-light: $td-light-theme;
     background-color: transparent;
   } 
   --mdc-icon-font: 'Material Symbols Outlined';
+
 }
 
 .mat-icon {
@@ -112,6 +113,7 @@ $theme-light: $td-light-theme;
   }
 }
 
+
 .mdc-data-table__cell  {
   cv-icon {
       margin-top:-4px;
@@ -127,3 +129,16 @@ $theme-light: $td-light-theme;
   cursor: pointer;
 }
 
+.covalent-icon, .covalent-icons, [covalent-icon], [covalent-icons] {
+  --mdc-icon-font: "covalent-icons";
+}
+
+
+  cv-button {
+--mdc-theme-text-primary-on-background: #3053f4ff;
+// --mdc-theme-on-primary: #324369ff;
+  }
+
+  cv-toolbar {
+    margin-bottom: 24px;
+  }

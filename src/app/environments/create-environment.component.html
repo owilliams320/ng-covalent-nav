@@ -1,0 +1,31 @@
+
+<cv-toolbar style="margin: 24px 24px 24px 36px">
+  <span
+    slot="title"
+    style="display: flex; align-items: flex-start; padding-left: 24px"
+  >
+    <cv-icon-button
+      style="padding-right: 12px"
+      [routerLink]="previousUrl"
+      slot="actionItems"
+      icon="arrow_back"
+    ></cv-icon-button>
+    <div style="display: flex; flex-direction: column">
+      <cv-typography style="padding-top: 6px" scale="headline5"
+        >Create environment</cv-typography
+      >
+      <cv-typography scale="body2"
+        >Make your selections to optimize both cost and performance, based on your workload needs.</cv-typography
+      >
+    </div>
+  </span>
+</cv-toolbar>
+
+<!-- <cv-action-ribbon labelText="this is my label" state="active">
+    <cv-button slot="action-items" label="Bulk action" class="mdc-banner__secondary-action" outlined></cv-button>
+</cv-action-ribbon> -->
+
+<img
+  src="assets/placeholder-content/create-environment.png"
+  style="width: 100%; margin: 0 auto; display: block"
+/>

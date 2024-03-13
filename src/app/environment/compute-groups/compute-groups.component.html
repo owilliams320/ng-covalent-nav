@@ -2,7 +2,7 @@
     <span slot="title">Compute groups</span>
     <cv-icon-button slot="actionItems" icon="menu_open"></cv-icon-button>
     <cv-icon-button class="hidden-large" slot="actionItems" icon="add"></cv-icon-button>
-    <cv-button class="hidden-small" label="Create" slot="actionItems" outlined></cv-button>
+    <cv-button (:click)="onCreateCompute()" color="primary" class="hidden-small" label="Create compute group" slot="actionItems" raised></cv-button>
 </cv-toolbar>
 
-<img src="assets/placeholder-content/compute-groups.png" style="width: 100%; margin: 0 auto; display: block;"/>
+<img src="assets/placeholder-content/compute-list.png" style="width: 100%; margin: 0 auto; display: block;"/>

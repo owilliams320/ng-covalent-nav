@@ -1,0 +1,48 @@
+.global-selector {
+    width: 250px;
+    background-color: #eaebfbff;
+    border-radius: 12px;
+    padding: 4px 16px;
+    &:hover {
+      cursor: pointer;
+      background-color: #dfe1f9ff;
+    }
+  }
+  
+  :host {
+    cv-button {
+      --mdc-theme-text-primary-on-background: #3053f4ff;
+    }
+    .secondary {
+      color: #484b5fff;
+    }
+  }
+
+  .select-container{
+
+    display: flex;
+    align-items: center;
+}
+
+.item-selected {
+    padding-right: 24px;
+    display: flex;
+}
+
+.select-container-subnav {
+    padding-left: 32px;
+}
+
+.child-item {
+    padding-left: 64px;
+    &--selected {
+        padding-left: 16px;
+    }
+}
+
+.org {
+    padding-left: 48px;
+    &--selected {
+        padding-left: 0;
+    }
+}

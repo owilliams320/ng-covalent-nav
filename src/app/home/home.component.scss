@@ -1,12 +1,34 @@
 .welcome-container {
-    padding: 0 0 32px;
+  padding: 0 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-
-.welcome-headline {
-    padding: 32px 0px 8px 8px;
-}
-
 
 .mdc-data-table__header-cell {
-    border-bottom: none;
+  border-bottom: none;
+}
+
+:host {
+    .mdc-card.mdc-card--outlined {
+        // .mdc-card {
+            height: inherit;
+        // }
+    }
+  cv-button#org-primary-cta {
+    --mdc-theme-text-primary-on-background: #3053f4ff;
+  }
+}
+
+:host {
+    cv-button {
+  --mdc-theme-text-primary-on-background: #3053f4ff;
+  // --mdc-theme-on-primary: #324369ff;
+
+}
+cv-menu {
+    position: absolute;
+    right: 324px;
+    top: 148px;
+}
 }

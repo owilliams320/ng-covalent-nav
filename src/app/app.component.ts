@@ -79,9 +79,10 @@ export class AppComponent {
   sectionParentRoute?: string;
   forcedOpen!: boolean;
 
-  helpOpen = false;
+  helpOpen = true;
   helpDocked = true;
   mainSectionContained = true;
+  disableEditor = false;
 
   helpDialog?: MatDialogRef<TdMarkdownNavigatorWindowComponent>;
 
@@ -133,6 +134,8 @@ export class AppComponent {
       if (!url) {
         return;
       }
+      console.log(url)
+      this.disableEditor = url === '/editor' ? true : false;
       this.setContainedPage(url);
     });
 
@@ -164,12 +167,14 @@ export class AppComponent {
     this.forcedOpen = JSON.parse(
       localStorage.getItem('app-preference-open') || 'false'
     );
+
+ 
   }
   
   setContainedPage(url: string) {
     // List of page URLs that should NOT show the contained state
-    const barePages = ['/', '/environments/*'];
-    let mainSectionContained = true;
+    const barePages = ['/', '/environments/*', '/environments/*/create'];
+    let mainSectionContained = false;
 
     for (let i = 0; i < barePages.length; i++) {
       // Match the array of patterns to their
@@ -195,6 +200,26 @@ export class AppComponent {
     this.cdr.detectChanges();
   }
 
+  supportRoutes =           {
+    label: 'Docs & support',
+    icon: 'school',
+
+    children: [
+      {
+        path: '/learn',
+        label: 'Learn',
+      },
+      {
+        path: '/documentation',
+        label: 'Documentation',
+      },
+      {
+        path: '/support',
+        label: 'Support',
+      },
+    ],
+  };
+
   navRoutes(url: string): navMapItem {
     const navMap: { [key: string]: navMapItem } = {
       home: {
@@ -203,28 +228,13 @@ export class AppComponent {
         children: [
           {
             path: '/',
-            icon: 'home',
-            label: 'Home',
-          },
-          {
-            path: '/editor',
-            icon: 'product_editor',
-            covalentIcon: true,
-            label: 'Editor',
-          },
-          {
-            path: '/environments',
-            label: 'Environments',
-            icon: 'language',
+            icon: 'dashboard',
+            label: 'Dashboard',
           },
           {
             label: 'Monitor',
-            icon: 'bar_chart',
+            icon: 'multiline_chart',
             children: [
-              {
-                path: '/monitor',
-                label: 'Overview',
-              },
               {
                 path: '/monitor/queries',
                 label: 'Queries',
@@ -246,79 +256,97 @@ export class AppComponent {
           {
             label: 'Access management',
             path: '/access-management',
-            icon: 'person',
+            icon: 'people',
             children: [
               {
-                path: 'access-management',
-                label: 'Organization Admins',
+                path: '/access-management/users',
+                label: 'Users',
               },
               {
                 path: '/access-management/identity-providers',
                 label: 'Identity providers',
               },
               {
-                path: '/access-management/realms',
-                label: 'Realms',
-              },
-              {
-                path: '/access-management/token-access',
-                label: 'Token access',
+                path: '/access-management/access-tokens',
+                label: 'Access tokens',
               },
             ],
           },
           {
-            label: 'Data management',
-            icon: 'data_management',
-            covalentIcon: true,
+            label: 'Docs & support',
+            icon: 'school',
+        
             children: [
               {
-                path: '/data-management/overview',
-                label: 'Overview',
+                path: '/learn',
+                label: 'Learn',
               },
               {
-                path: '/data-management/data-copy',
-                label: 'Data copy',
+                path: '/documentation',
+                label: 'Documentation',
               },
               {
-                path: '/data-management/data-migration',
-                label: 'Data migration',
-              },
-              {
-                path: '/data-management/flows',
-                label: 'Flows',
+                path: '/support',
+                label: 'Support',
               },
             ],
-          },
+          }
         ],
+        
       },
       environments: {
         path: '/environments/**',
         children: [
           {
             path: ['/environments', this.sectionName],
-            icon: 'language',
-            label: this.sectionName,
+            icon: 'dashboard',
+            label: 'Dashboard'
           },
           {
             path: ['/environments', this.sectionName, 'users'],
-            icon: 'nearby',
+            icon: 'people',
             label: 'Users',
           },
           {
             path: ['/environments', this.sectionName, 'compute-groups'],
-            icon: 'nearby',
+            icon: 'compute_cluster_group',
+            covalentIcon: true,
             label: 'Compute groups',
           },
           {
-            path: ['/environments', this.sectionName, 'backups'],
-            icon: 'nearby',
-            label: 'Backups',
+            path: ['/environments', this.sectionName, '**'],
+            icon: 'database',
+            label: 'Data management',
+            covalentIcon: true,
+            children: [
+              {
+                path: ['/environments', this.sectionName, 'backups'],
+                label: 'Backups',
+              },
+              {
+                path: ['/environments', this.sectionName, 'data-copy'],
+                label: 'Data copy',
+              },
+              {
+                path: ['/environments', this.sectionName, 'data-migration'],
+                label: 'Data migration',
+              },
+              {
+                path: ['/environments', this.sectionName, 'flows'],
+                label: 'Flows',
+              },
+              {
+                path: ['/environments', this.sectionName, 'query-grid'],
+                label: 'QueryGrid',
+              },
+            ]
           },
           {
-            path: ['/environments', this.sectionName, 'query-grid'],
-            icon: 'nearby',
-            label: 'QueryGrid',
+            path: ['/environments', this.sectionName, 'settings'],
+            icon: 'settings',
+            label: 'Settings',
           },
+          {...this.supportRoutes}
         ],
       },
       consumption: {
@@ -444,4 +472,6 @@ export class AppComponent {
       })
     );
   }
+
+
 }

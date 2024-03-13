@@ -20,7 +20,6 @@ import { MatTableModule } from '@angular/material/table';
 import { CovalentMarkdownNavigatorModule } from '@covalent/markdown-navigator';
 import { CovalentCommonModule } from '@covalent/core/common';
 
-
 import { OverviewComponent } from './monitor/overview/overview.component';
 import { BudgetsComponent } from './monitor/budgets/budgets.component';
 import { ConsumptionComponent } from './monitor/consumption/consumption.component';
@@ -36,10 +35,19 @@ import { BackupsComponent } from './environment/backups/backups.component';
 import { ConsumptionDetailComponent } from './monitor/consumption-detail/consumption-detail.component';
 import { CostCalculatorComponent } from './monitor/cost-calculator/cost-calculator.component';
 import { UsersComponent } from './environment/users/users.component';
+import { GlobalSwitcherListComponent } from './global-switcher-list/global-switcher-list.component';
+import { GlobalSwitcherOverlayListComponentComponent } from './global-switcher-overlay-list-component/global-switcher-overlay-list-component.component';
+import { CreateUsersComponent } from './create-users/create-users.component';
+import { CreateEnvironmentComponent } from './environments/create-environment.component';
+import { CreateComputeComponent } from './create-compute/create-compute.component';
+import { IdPListComponent } from './id-plist/id-plist.component';
+import { AccessTokensComponent } from './access-tokens/access-tokens.component';
+import { AlertsComponent } from './alerts/alerts.component';
+import { EnvironmentSettingsComponent } from './environment-settings/environment-settings.component';
+import { CreateBackupComponent } from './environment/backups/create/create-backup.component';
 
 @NgModule({
   declarations: [
-    
     AppComponent,
     EnvironmentsComponent,
     EditorComponent,
@@ -67,8 +75,17 @@ import { UsersComponent } from './environment/users/users.component';
     BackupsComponent,
     ConsumptionDetailComponent,
     CostCalculatorComponent,
-    UsersComponent
-
+    UsersComponent,
+    GlobalSwitcherOverlayListComponentComponent,
+    GlobalSwitcherListComponent,
+    CreateEnvironmentComponent,
+    CreateUsersComponent,
+    CreateComputeComponent,
+    IdPListComponent,
+    AccessTokensComponent,
+    AlertsComponent,
+    EnvironmentSettingsComponent,
+    CreateBackupComponent
   ],
   imports: [
     BrowserModule,
@@ -78,9 +95,12 @@ import { UsersComponent } from './environment/users/users.component';
     MatTableModule,
     CovalentCommonModule,
     CovalentMarkdownNavigatorModule,
+
+
+
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {}

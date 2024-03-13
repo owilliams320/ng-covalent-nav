@@ -1,0 +1,28 @@
+<div style=" width: 100%; margin: 0 auto; display: block;">
+    <!-- <cv-toolbar style="padding-left: 64px;"> -->
+        <span
+          slot="title"
+          style="display: flex; align-items: flex-start; padding:  0 0 18px 130px"
+        >
+
+          <cv-icon-button
+          style="padding-right: 12px;"
+            [routerLink]="previousUrl"
+            slot="actionItems"
+            icon="arrow_back"
+          ></cv-icon-button>
+          <div style="display: flex; flex-direction: column;  max-width: 600px;">
+              <cv-typography style="padding-top: 6px;" scale="headline5">Create compute group</cv-typography>
+              <cv-typography style="padding-top: 6px; white-space: normal;" scale="body2">Use compute profiles to manage compute groups and control costs.</cv-typography>
+              <cv-typography style="padding-top: 6px; white-space: normal;" scale="body2">A compute profile is a scaling policy for compute capacity. You can create multiple compute profiles for different times of the day or week for different workloads.</cv-typography>
+          </div>
+      
+        </span>
+      <!-- </cv-toolbar> -->
+    
+    <!-- <cv-action-ribbon labelText="this is my label" state="active">
+        <cv-button slot="action-items" label="Bulk action" class="mdc-banner__secondary-action" outlined></cv-button>
+    </cv-action-ribbon> -->
+    
+    <img src="assets/placeholder-content/create-compute.png" style="width: 100%; margin: 0 auto; display: block;"/>
+    </div>
