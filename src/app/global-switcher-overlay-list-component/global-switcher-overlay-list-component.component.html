@@ -1,11 +1,10 @@
-<span
-  class="mdc-menu-surface--anchor"
+<div style="position: relative;">
+  <div
+  class="global-selector"
   id="global-switcher-button"
-  ngClass="global-selector"
   (click)="onGlobalSelect()"
-  slot="title"
-  style="display: flex; align-items: center"
->
+  #globalSwitcherTrigger>
+  <div class="global-selector-inner">
   <span
     *ngIf="selectedSwitcherItem?.id === 'org'; else selectedElseBlock"
     [ngClass]=""
@@ -30,56 +29,51 @@
     >
   </ng-template>
   <cv-icon>arrow_drop_down</cv-icon>
-</span>
-
-<cv-menu #globalSwitcherMenu>
-  <span *ngFor="let item of localGlobalSwitcherItems; index as i">
-    <cv-typography
-    *ngIf="i === 1"
-    style="line-height: 0.2; font-weight: bold; margin: 12px 0 0 0"
-    scale="body1"
-    >Environments</cv-typography>
-    <cv-list-item style="width: 300px">
-      <div (:click)="onGlobalItemSelect(item)" class="select-container">
-        <div *ngIf="selectedSwitcherItem?.id === item.id" class="item-selected">
-          <cv-icon> check </cv-icon>
-        </div>
-        <div
-          *ngIf="item.id === 'org'; else elseBlock"
-          [ngClass]="
-            selectedSwitcherItem?.id === item.id ? 'org--selected' : 'org'
-          "
-          style="display: flex; flex-direction: column; width: 100%"
-        >
-          <cv-typography
-            style="line-height: 0.2; font-weight: bold"
-            scale="body1"
-            >{{ item.name }}</cv-typography
+</div>
+</div>
+  <cv-menu corner="BOTTOM_START" #globalSwitcherMenu>
+    <span *ngFor="let item of localGlobalSwitcherItems; index as i" (click)="onGlobalItemSelect(item)">
+      <cv-typography
+      *ngIf="i === 1"
+      style="line-height: 0.2; font-weight: bold; margin: 12px 12px 0"
+      scale="body1"
+      >Environments</cv-typography>
+      <cv-list-item graphic="medium" >
+        <cv-icon *ngIf="selectedSwitcherItem?.id === item.id" slot="graphic"> check </cv-icon>
+        <span
+            *ngIf="item.id === 'org'; else elseBlock"
+            [ngClass]="
+              selectedSwitcherItem?.id === item.id ? 'org--selected' : 'org'
+            "
           >
-          <cv-typography
-            class="secondary"
-            style="line-height: 0"
-            scale="body2"
-            >{{ item.description }}</cv-typography
+            <cv-typography
+              style="line-height: 0.2; font-weight: bold"
+              scale="body1"
+              >{{ item.name }}</cv-typography
+            >
+            <cv-typography
+              class="secondary"
+              style="line-height: 0"
+              scale="body2"
+              >{{ item.description }}</cv-typography
+            >
+        </span>
+        <ng-template #elseBlock>
+          <cv-text-lockup
+            [ngClass]="
+              selectedSwitcherItem?.id === item.id
+                ? 'child-item--selected'
+                : 'child-item'
+            "
+            scale="small"
+            [subText]="item.status?.message"
+            [icon]="item.status?.icon"
+            [state]="item.status?.state"
+            trailingSubText
+            >{{ item.name }}</cv-text-lockup
           >
-        </div>
-      </div>
-      <ng-template #elseBlock>
-
-        <cv-text-lockup
-          [ngClass]="
-            selectedSwitcherItem?.id === item.id
-              ? 'child-item--selected'
-              : 'child-item'
-          "
-          scale="small"
-          [subText]="item.status?.message"
-          [icon]="item.status?.icon"
-          [state]="item.status?.state"
-          trailingSubText
-          >{{ item.name }}</cv-text-lockup
-        >
-      </ng-template>
-    </cv-list-item>
-  </span>
-</cv-menu>
+        </ng-template>
+      </cv-list-item>
+    </span>
+  </cv-menu>
+</div>

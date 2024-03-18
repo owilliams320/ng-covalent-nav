@@ -75,16 +75,22 @@
     </ng-container>
   </cv-list>
 
-      <cv-toolbar slot="user-menu" no-divider>
-        <span slot="title" >
-        <app-global-switcher-overlay-list-component></app-global-switcher-overlay-list-component>
-      </span>
-        <cv-button color="secondary" outlined style="margin: 0 16px 0 0" slot="actionItems" covalent-icons icon="product_editor">SQL editor</cv-button>
-        <cv-textfield slot="actionItems" icon="forum" placeholder="Message ask.ai" dense></cv-textfield>
-        <cv-icon-button slot="actionItems" icon="notifications"></cv-icon-button>
-        <cv-icon-button slot="actionItems" icon="help" (:click)="toggleHelp()"></cv-icon-button>
-        <cv-icon-button slot="actionItems" icon="person"></cv-icon-button>
-       </cv-toolbar>
+
+  <!-- TODO: need to revise the Toolbar component so the usecase below works -->
+  <div slot="user-menu" style="background-color:var(--cv-theme-surface); display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; margin-bottom: 24px;">
+    <app-global-switcher-overlay-list-component slot="user-menu"></app-global-switcher-overlay-list-component>
+    <span style="display: flex; align-items: center;">
+      <cv-button color="secondary" outlined style="margin: 0 16px 0 0" slot="actionItems" covalent-icons icon="product_editor" routerLink="/editor">SQL editor</cv-button>
+      <cv-textfield slot="actionItems" icon="forum" placeholder="Message ask.ai" dense></cv-textfield>
+      <cv-icon-button slot="actionItems" icon="notifications"></cv-icon-button>
+      <cv-icon-button slot="actionItems" icon="help" (:click)="toggleHelp()"></cv-icon-button>
+      <cv-icon-button slot="actionItems" icon="person"></cv-icon-button>
+    </span>
+  </div>
+
+
+
+      
 
       <div slot="help" class="mdc-typography">
         <cv-toolbar>
@@ -111,27 +117,3 @@
   <router-outlet></router-outlet>
 </cv-app-shell>
 
-<cv-menu absolute id="section-menu">
-  <cv-list-item>Production</cv-list-item>
-  <cv-list-item>Development</cv-list-item>
-</cv-menu>
-
-<!-- <script>
-      var appShell = document.querySelector('cv-app-shell');
-      var sectionMenu = document.querySelector('#section-menu');
-      var sectionSelector = document.querySelector('.section-selector');
-
-      document.querySelector('.help-item').addEventListener('click', () => {
-        appShell.helpOpen = !appShell.helpOpen;
-      });
-
-      document.querySelector('.help-close').addEventListener('click', () => {
-        appShell.helpOpen = false;
-      });
-
-      sectionSelector.addEventListener('click', function () {
-        sectionMenu.open = !sectionMenu.open;
-      });
-
-      sectionMenu.anchor = sectionSelector;
-    </script> -->

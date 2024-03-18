@@ -26,12 +26,9 @@ import '@covalent/components/top-app-bar-fixed';
 import {
   BehaviorSubject,
   Observable,
-  Subject,
   combineLatest,
   filter,
   map,
-  switchMap,
-  switchScan,
 } from 'rxjs';
 import { minimatch } from 'minimatch';
 import { NavigationService } from './navigation.service';
@@ -134,7 +131,6 @@ export class AppComponent {
       if (!url) {
         return;
       }
-      console.log(url)
       this.disableEditor = url === '/editor' ? true : false;
       this.setContainedPage(url);
     });
@@ -173,8 +169,14 @@ export class AppComponent {
   
   setContainedPage(url: string) {
     // List of page URLs that should NOT show the contained state
-    const barePages = ['/', '/environments/*', '/environments/*/create'];
-    let mainSectionContained = false;
+    const barePages = [
+      '/', 
+      '/environments/*',
+      '/environments/**/create',
+      '/environments/*/compute-groups',
+      '/access-management/*/create',
+    ];
+    let mainSectionContained = true;
 
     for (let i = 0; i < barePages.length; i++) {
       // Match the array of patterns to their

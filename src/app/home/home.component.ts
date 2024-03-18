@@ -15,9 +15,15 @@ export class HomeComponent {
   @HostBinding('@routeAnimation') routeAnimation = false;
 
   @ViewChild('createNewMenu') createNewMenu?: ElementRef;
+  @ViewChild('createNewMenuTrigger') createNewMenuTrigger?: ElementRef;
   
-  onCreateNew() {
-    this.createNewMenu?.nativeElement?.setAttribute('open', '');
+  ngAfterViewInit() {
+    const createNewEl = this.createNewMenu?.nativeElement;
+    createNewEl.anchor = this.createNewMenuTrigger?.nativeElement;
   }
 
+  onCreateNew() {
+    const createNewEl = this.createNewMenu?.nativeElement;
+    createNewEl.open = true;
+  }
 }
