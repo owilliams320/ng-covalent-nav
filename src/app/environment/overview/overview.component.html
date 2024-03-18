@@ -1,38 +1,38 @@
-<div style="max-width: 1150px">
-  <cv-toolbar>
-    <span slot="title"
-      ><span class="environment-title">{{ sectionName }}</span>
-      environment</span
-    >
-    <cv-button
-    id="org-primary-cta"
-    label="Create new"
-    icon="arrow_drop_down"
-    slot="actionItems"
-    color="primary"
-    trailingIcon
-    raised
-    (click)="onCreateNew()"
-  ></cv-button>
-  </cv-toolbar>
-  <cv-menu #createNewMenu>
-    <cv-list-item [routerLink]="['/access-management/users/create']"   style="width: 300px;">
-      <div class="select-container" >
-          Users
-          </div>
-      </cv-list-item>
-    <cv-list-item [routerLink]="['/environments/' + sectionName + '/compute-groups/create']"  style="width: 300px;">
-    <div class="select-container" >
-        Compute profile
-        </div>
-    </cv-list-item>
-    <cv-list-item [routerLink]="['/environments/' + sectionName + '/backups/create']" style="width: 300px;">
-      <div class="select-container" >
-          Backup
-          </div>
-      </cv-list-item>
-  </cv-menu>
+<div style="max-width: 1150px; margin: auto;">
 
+<span style="display: flex; justify-content: space-between; align-items: center; height: 64px; margin-bottom: 24px;">
+<cv-typography scale="headline6" class="environment-title">{{ sectionName }} environment</cv-typography>
+  
+<div style="position: relative;">
+  <cv-button
+id="org-primary-cta"
+label="Create new"
+icon="arrow_drop_down"
+color="primary"
+trailingIcon
+raised
+(click)="onCreateNew()"
+#createNewMenuTrigger
+></cv-button>
+<cv-menu fixed corner="BOTTOM_START" #createNewMenu>
+<cv-list-item [routerLink]="['/access-management/users/create']"   style="width: 300px;">
+  <div class="select-container" >
+      Users
+      </div>
+  </cv-list-item>
+<cv-list-item [routerLink]="['/environments/' + sectionName + '/compute-groups/create']"  style="width: 300px;">
+<div class="select-container" >
+    Compute profile
+    </div>
+</cv-list-item>
+<cv-list-item [routerLink]="['/environments/' + sectionName + '/backups/create']" style="width: 300px;">
+  <div class="select-container" >
+      Backup
+      </div>
+  </cv-list-item>
+</cv-menu>
+</div>
+</span>
 
   <!-- <cv-action-ribbon labelText="this is my label" state="active">
     <cv-button slot="action-items" label="Bulk action" class="mdc-banner__secondary-action" outlined></cv-button>

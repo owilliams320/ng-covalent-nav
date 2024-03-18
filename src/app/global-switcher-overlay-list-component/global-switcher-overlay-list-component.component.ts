@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import {
@@ -13,28 +13,33 @@ import { NavigationService } from '../navigation.service';
   templateUrl: './global-switcher-overlay-list-component.component.html',
   styleUrl: './global-switcher-overlay-list-component.component.scss',
 })
-export class GlobalSwitcherOverlayListComponentComponent {
+export class GlobalSwitcherOverlayListComponentComponent implements AfterViewInit {
   selectedSwitcherItem?: GlobalSwitcherItem = globalSwitcherItems[0];
   localGlobalSwitcherItems = globalSwitcherItems;
 
+  @ViewChild('globalSwitcherTrigger') globalSwitcherTrigger?: ElementRef;
   @ViewChild('globalSwitcherMenu') globalSwitcherMenu?: ElementRef;
 
   constructor(
     private location: Location,
     private router: Router,
-    private activeRoute: ActivatedRoute,
     private nav: NavigationService
   ) {}
 
   onGlobalSelect(id?: string) {
-    this.globalSwitcherMenu?.nativeElement?.setAttribute('open', '');
+    const switcherEl = this.globalSwitcherMenu?.nativeElement;
+    switcherEl.setAttribute('open', true);
   }
 
   onGlobalItemSelect(item: GlobalSwitcherItem) {
-    console.log(this.activeRoute.snapshot, this.location);
     this.globalSwitcherMenu?.nativeElement?.removeAttribute('open');
     this.selectedSwitcherItem = item;
     this.router.navigate([item?.url]);
+  }
+
+  ngAfterViewInit() {
+    const switcherEl = this.globalSwitcherMenu?.nativeElement;
+    switcherEl.anchor = this.globalSwitcherTrigger?.nativeElement;
   }
 
   ngOnInit() {

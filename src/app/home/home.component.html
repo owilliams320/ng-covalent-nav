@@ -3,50 +3,55 @@
     <cv-typography scale="headline5" class="welcome-headline"
       >VantageCloud Lake dashboard</cv-typography
     >
-    <cv-button
-      id="org-primary-cta"
-      label="Create new"
-      icon="arrow_drop_down"
-      slot="actionItems"
-      color="primary"
-      trailingIcon
-      raised
-      (click)="onCreateNew()"
-    ></cv-button>
+
+    <div style="position: relative">
+      <cv-button
+        id="org-primary-cta"
+        label="Create new"
+        icon="arrow_drop_down"
+        color="primary"
+        trailingIcon
+        raised
+        (click)="onCreateNew()"
+        #createNewMenuTrigger
+      ></cv-button>
+      <cv-menu #createNewMenu fixed corner="BOTTOM_START">
+        <cv-list-item
+          [routerLink]="['/environments', 'create']"
+          style="width: 300px"
+        >
+          <div class="select-container">Environment</div>
+        </cv-list-item>
+        <cv-list-item
+          [routerLink]="['/access-management/users/create']"
+          style="width: 300px"
+        >
+          <div class="select-container">Users</div>
+        </cv-list-item>
+      </cv-menu>
+    </div>
   </div>
-  <cv-menu #createNewMenu>
-    <cv-list-item [routerLink]="['/environments', 'create']"  style="width: 300px;">
-      <div class="select-container" >
-          Environment
-          </div>
-      </cv-list-item>
-    <cv-list-item [routerLink]="['/access-management/users/create']"  style="width: 300px;">
-    <div class="select-container" >
-        Users
-        </div>
-    </cv-list-item>
-  </cv-menu>
+
   <div class="mdc-layout-grid__inner">
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
-      <cv-card cardTitle="Recently viewed" outlined actionBar fullHeight>
+      <cv-card cardTitle="Recently viewed" outlined fullHeight>
         <cv-list>
-          <cv-list-item>
-            <a routerLink="/learn">Docs & Support - Learn</a>
-          </cv-list-item>
-          <cv-list-item>
-            <a routerLink="/environments/production">Production</a>
-          </cv-list-item>
-          <cv-list-item>
-            <a routerLink="/environments/production/backups"
-              >Production backups</a
-            >
-          </cv-list-item>
+          <a routerLink="/learn"><cv-list-item>
+            Docs & Support - Learn
+          </cv-list-item></a>
+          <a routerLink="/environments/production"><cv-list-item>
+            Production
+          </cv-list-item></a>
+          <a routerLink="/environments/production/backups"
+          ><cv-list-item>
+            Production backups
+          </cv-list-item></a>
         </cv-list>
       </cv-card>
     </div>
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5">
-      <cv-card cardTitle="Common tasks" outlined actionBar fullHeight>
-        <cv-list >
+      <cv-card cardTitle="Common tasks" outlined fullHeight>
+        <cv-list>
           <cv-list-item
             [routerLink]="['environments', 'create']"
             graphic="avatar"
@@ -103,7 +108,7 @@
       </cv-card>
     </div>
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-      <cv-card cardTitle="Overview" outlined actionBar>
+      <cv-card cardTitle="Overview" outlined>
         <cv-list>
           <cv-list-item hasMeta twoLine>
             ACME
@@ -134,7 +139,7 @@
     </div>
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
       <cv-card cardTitle="Environments" outlined actionBar>
-        <cv-list >
+        <cv-list>
           <cv-list-item
             [routerLink]="['environments', 'production']"
             hasMeta
