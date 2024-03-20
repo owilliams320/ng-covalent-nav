@@ -154,6 +154,7 @@ body {
 /* Dumb stuff */
 [ng-reflect-router-link] {
   cursor: pointer;
+  text-decoration: none;
 }
 cv-toolbar {
   margin-bottom: 24px;

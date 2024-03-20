@@ -18,6 +18,7 @@ import '@covalent/components/menu';
 import '@covalent/components/switch';
 import '@covalent/components/formfield';
 import '@covalent/components/tab';
+import '@covalent/components/tab-bar';
 import '@covalent/components/textfield';
 
 // TODO: import below should not be required for app-shell
