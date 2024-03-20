@@ -155,6 +155,8 @@ export class AppComponent {
     this.getHelpJSON().subscribe({
       next: (items: IMarkdownNavigatorItem[]) => {
         this.items = items;
+
+        this.cdr.markForCheck();
       },
     });
   }
@@ -164,8 +166,6 @@ export class AppComponent {
     this.forcedOpen = JSON.parse(
       localStorage.getItem('app-preference-open') || 'false'
     );
-
- 
   }
   
   setContainedPage(url: string) {
