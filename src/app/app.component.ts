@@ -77,7 +77,7 @@ export class AppComponent {
   sectionParentRoute?: string;
   forcedOpen!: boolean;
 
-  helpOpen = true;
+  helpOpen = false;
   helpDocked = true;
   mainSectionContained = true;
   disableEditor = false;
@@ -167,11 +167,11 @@ export class AppComponent {
       localStorage.getItem('app-preference-open') || 'false'
     );
   }
-  
+
   setContainedPage(url: string) {
     // List of page URLs that should NOT show the contained state
     const barePages = [
-      '/', 
+      '/',
       '/environments/*',
       '/environments/**/create',
       '/environments/*/compute-groups',
@@ -203,7 +203,7 @@ export class AppComponent {
     this.cdr.detectChanges();
   }
 
-  supportRoutes =           {
+  supportRoutes = {
     label: 'Docs & support',
     icon: 'school',
 
@@ -278,7 +278,7 @@ export class AppComponent {
           {
             label: 'Docs & support',
             icon: 'school',
-        
+
             children: [
               {
                 path: '/learn',
@@ -295,7 +295,7 @@ export class AppComponent {
             ],
           }
         ],
-        
+
       },
       environments: {
         path: '/environments/**',
@@ -349,7 +349,7 @@ export class AppComponent {
             icon: 'settings',
             label: 'Settings',
           },
-          {...this.supportRoutes}
+          { ...this.supportRoutes }
         ],
       },
       consumption: {
