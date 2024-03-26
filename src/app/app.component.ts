@@ -196,6 +196,7 @@ export class AppComponent {
       '/environments/**/create',
       '/environments/*/compute-groups',
       '/access-management/*/create',
+      '/learn',
     ];
     let mainSectionContained = true;
 

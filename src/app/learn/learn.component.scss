@@ -1,0 +1,46 @@
+:host {
+  display: block;
+  padding: 24px 16px 0;
+  max-width: 1200px;
+  margin: auto;
+}
+.learn-content {
+  margin-bottom: 32px;
+  display: block;
+
+  .learn-content-inner {
+    padding: 24px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .learn-title {
+    padding: 16px;
+  }
+
+  .learn-text-actions {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    cv-icon {
+        margin-left: 24px;
+    }
+  }
+
+  .mdc-layout-grid__inner {
+    padding: 0 16px 16px;
+  }
+
+  cv-card {
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  cv-icon.learn-icon {
+    --mdc-icon-size: 32px;
+    color: var(--cv-theme-text-logo-on-background, --cv-theme-emphasis);
+    margin-right: 24px;
+  }
+}

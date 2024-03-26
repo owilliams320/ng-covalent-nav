@@ -38,6 +38,7 @@
   padding: 8px 0 8px 22px;
   border-left: 1px solid var(--cv-theme-divider);
   display: block;
+  color: var(--cv-theme-on-surface-variant);
 }
 
 .tree-divider {
@@ -77,4 +78,8 @@ cv-list-item {
   &.org-item {
     --mdc-list-item-graphic-margin: 17px;
   }
+}
+
+cv-typography cv-icon {
+  margin-right: 4px;
 }

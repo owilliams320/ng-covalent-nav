@@ -36,7 +36,7 @@
           >{{ item.name }}</cv-text-lockup
         >
         <ng-template #elseBlock>
-          {{ item.name }}
+          <cv-typography  scale="body1">{{ item.name }}</cv-typography>
         </ng-template>
         <cv-typography  *ngIf="item.id !== 'org'"  scale="caption" class="cv-theme-{{item.status?.state}}" slot="meta">
           <cv-icon>{{item.status?.icon}}</cv-icon>
