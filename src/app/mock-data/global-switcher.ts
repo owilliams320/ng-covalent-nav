@@ -23,7 +23,7 @@ export interface GlobalSwitcherItem {
       name: 'Production',
       status: {
         state: 'positive',
-        icon: 'check',
+        icon: 'electric_bolt',
         message: 'Active',
       },
     },
@@ -33,7 +33,7 @@ export interface GlobalSwitcherItem {
       name: 'Staging',
       status: {
         state: 'positive',
-        icon: 'check',
+        icon: 'electric_bolt',
         message: 'Active',
       },
     },
@@ -42,9 +42,9 @@ export interface GlobalSwitcherItem {
       url: '/environments/development',
       name: 'Development',
       status: {
-        state: 'positive',
-        icon: 'check',
-        message: 'Active',
+        state: 'negative',
+        icon: 'do_not_disturb_on',
+        message: 'Unavailable',
       },
     },
   ];

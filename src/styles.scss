@@ -83,22 +83,23 @@ body {
 }
 
 // Dark theme
-// @media (prefers-color-scheme: dark) {
-//   $theme-dark: $td-dark-theme;
+.theme-dark {
+  $theme-dark: $td-dark-theme;
 
-//   @include mat.core-theme($theme-dark);
-//   @include mat.all-component-themes($theme-dark);
-//   @include covalent-theme($theme-dark);
-//   @include covalent-markdown-theme($theme-dark);
-//   @include covalent-highlight-theme($theme-dark);
-//   @include covalent-flavored-markdown-theme($theme-dark);
-//   @include covalent-markdown-navigator-theme($theme-dark);
+  @include mat.core-theme($theme-dark);
+  @include mat.all-component-themes($theme-dark);
+  @include covalent-theme($theme-dark);
+  @include covalent-markdown-theme($theme-dark);
+  @include covalent-highlight-theme($theme-dark);
+  @include covalent-flavored-markdown-theme($theme-dark);
+  @include covalent-markdown-navigator-theme($theme-dark);
 
-//   body {
-//     color: #fff;
-//     font-family: 'Inter', Arial, Helvetica, sans-serif;
-//   }
-// }
+  // Covalent web components theme
+  @include covalent-theme.components-theme(
+    $dark-colors,
+    map-get(covalent-tokens.$tokens, typography)
+  );
+}
 
 
 :root {

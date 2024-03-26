@@ -35,7 +35,6 @@ import { BackupsComponent } from './environment/backups/backups.component';
 import { ConsumptionDetailComponent } from './monitor/consumption-detail/consumption-detail.component';
 import { CostCalculatorComponent } from './monitor/cost-calculator/cost-calculator.component';
 import { UsersComponent } from './environment/users/users.component';
-import { GlobalSwitcherListComponent } from './global-switcher-list/global-switcher-list.component';
 import { GlobalSwitcherOverlayListComponentComponent } from './global-switcher-overlay-list-component/global-switcher-overlay-list-component.component';
 import { CreateUsersComponent } from './create-users/create-users.component';
 import { CreateEnvironmentComponent } from './environments/create-environment.component';
@@ -77,7 +76,6 @@ import { CreateBackupComponent } from './environment/backups/create/create-backu
     CostCalculatorComponent,
     UsersComponent,
     GlobalSwitcherOverlayListComponentComponent,
-    GlobalSwitcherListComponent,
     CreateEnvironmentComponent,
     CreateUsersComponent,
     CreateComputeComponent,

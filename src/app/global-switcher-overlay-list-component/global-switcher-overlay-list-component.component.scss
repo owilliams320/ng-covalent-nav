@@ -1,8 +1,11 @@
 .global-selector {
-  width: 250px;
+  width: 264px;
+  display: flex;
+  align-items: center;
   background-color: var(--cv-theme-secondary-container);
   border-radius: 12px;
   padding: 4px 16px;
+  min-height: 40px;
   &:hover {
     cursor: pointer;
   }
@@ -12,6 +15,15 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+
+    .selector-icons {
+      display: flex;
+      align-items: center;
+    }
+
+    .status-icon {
+      --mdc-icon-size: 18px;
+    }
   }
 }
 
@@ -21,7 +33,48 @@
   }
 }
 
+.environments-header {
+  margin-left: 58px;
+  padding: 8px 0 8px 22px;
+  border-left: 1px solid var(--cv-theme-divider);
+  display: block;
+}
+
+.tree-divider {
+  border-left: 1px solid var(--cv-theme-divider);
+  height: 48px;
+  margin-top: -48px;
+  margin-left: 58px;
+
+  .tree-divider-line {
+    display: block;
+    background-color:var(--cv-theme-divider);
+    width: 12px;
+    height: 1px;
+    top: 50%;
+    position: relative;
+  }
+
+  &.last {
+    height: 24px;
+    margin-top: -48px;
+    margin-bottom: 24px;
+
+    .tree-divider-line {
+      top: 100%;
+    }
+  }
+}
 
 cv-list-item {
-  min-width: 300px;
+  --mdc-list-item-graphic-margin: 42px;
+  min-width: 330px;
+
+  [slot="meta"] {
+    --mdc-icon-size: 16px;
+  }
+
+  &.org-item {
+    --mdc-list-item-graphic-margin: 17px;
+  }
 }

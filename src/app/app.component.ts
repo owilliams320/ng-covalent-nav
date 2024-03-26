@@ -49,6 +49,7 @@ export interface navigationItem {
   path?: string | any[];
   label?: string;
   children?: navigationItem[];
+  external?: boolean;
 }
 
 export interface navMapItem {
@@ -95,26 +96,11 @@ export class AppComponent {
   _helpBaseUrl = 'https://www.teradata.com/product-help/';
   readonly USE_CASES_ID: string = 'bkm1640280721917';
 
-  items: IMarkdownNavigatorItem[] = [
-    {
-      id: 'covalent',
-      title: 'Covalent',
-      children: [
-        {
-          id: 'component',
-          title: 'Components',
-          children: [
-            {
-              id: 'td-loading',
-              url: 'https://raw.githubusercontent.com/Teradata/covalent/main/src/platform/core/loading/README.md',
-              title: 'tdLoading',
-            },
-          ],
-        },
-      ],
-    },
-  ];
+  items: IMarkdownNavigatorItem[] = [];
 
+  @ViewChild('accountMenu') accountMenu?: ElementRef;
+  @ViewChild('accountMenuTrigger') accountMenuTrigger?: ElementRef;
+  
   constructor(
     public router: Router,
     public activeRoute: ActivatedRoute,
@@ -152,6 +138,8 @@ export class AppComponent {
         this.setCurrentRoute(url);
       });
 
+
+    // Load the help JSON from Teradata's CDN  
     this.getHelpJSON().subscribe({
       next: (items: IMarkdownNavigatorItem[]) => {
         this.items = items;
@@ -159,6 +147,17 @@ export class AppComponent {
         this.cdr.markForCheck();
       },
     });
+
+    // Set the theme based on user preference or system preference
+    const localTheme = localStorage.getItem('theme');
+
+    // Set active theme from user dark theme preference if not set locally
+    this.activeTheme =
+      localTheme ??
+      (window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'theme-dark'
+        : 'theme-light');
   }
 
   ngOnInit(): void {
@@ -168,6 +167,27 @@ export class AppComponent {
     );
   }
 
+  ngAfterViewInit() {
+    const accountMenuEl = this.accountMenu?.nativeElement;
+    accountMenuEl.anchor = this.accountMenuTrigger?.nativeElement;
+  }
+
+  accountMenuClick() {
+    const accountMenuEl = this.accountMenu?.nativeElement;
+    accountMenuEl.open = true;
+  }
+
+  get activeTheme(): string | null {
+    return localStorage.getItem('theme');
+  }
+  set activeTheme(activeTheme: string) {
+    document.querySelector('body')?.classList.remove('theme-dark');
+    document.querySelector('body')?.classList.remove('theme-light');
+
+    localStorage.setItem('theme', activeTheme);
+    document.querySelector('body')?.classList.add(activeTheme);
+  }
+  
   setContainedPage(url: string) {
     // List of page URLs that should NOT show the contained state
     const barePages = [
@@ -287,10 +307,12 @@ export class AppComponent {
               {
                 path: '/documentation',
                 label: 'Documentation',
+                external: true,
               },
               {
                 path: '/support',
                 label: 'Support',
+                external: true,
               },
             ],
           }
@@ -299,6 +321,7 @@ export class AppComponent {
       },
       environments: {
         path: '/environments/**',
+        showSectionTitle: false,
         children: [
           {
             path: ['/environments', this.sectionName],
@@ -361,6 +384,86 @@ export class AppComponent {
             label: this.sectionName,
           },
         ],
+      },
+      'modelOps': {
+        path: '/model-ops/**',
+        children: [
+          {
+            path: ['/model-ops', this.sectionName],
+            icon: 'webhook',
+            label: this.sectionName
+          },
+          {
+            path: ['/model-ops', this.sectionName, 'deployments'],
+            icon: 'deployed_code',
+            label: 'Deployments'
+          },
+          {
+            path: ['/model-ops', this.sectionName, 'data-sets'],
+            icon: 'nearby',
+            label: 'Data sets'
+          },
+          {
+            path: ['/model-ops', this.sectionName, 'jobs'],
+            icon: 'nearby',
+            label: 'Jobs'
+          },
+          {
+            path: ['/model-ops', this.sectionName, 'alerts'],
+            icon: 'new_releases',
+            label: 'Alerts'
+          },
+          {
+            path: ['/model-ops', this.sectionName, 'settings'],
+            icon: 'settings',
+            label: 'Settings'
+          },
+        ]
+      },
+      'modelOpsModel': {
+        path: '/model-ops/**/model/**',
+        children: [
+          {
+            path: `${this.sectionParentRoute}/model/${this.sectionName}`,
+            icon: 'webhook',
+            label: this.sectionName
+          },
+          {
+            path: `${this.sectionParentRoute}/model/${this.sectionName}/commit-history`,
+            icon: 'nearby',
+            label: 'Commit history'
+          },
+          {
+            path: `${this.sectionParentRoute}/model/${this.sectionName}/alerts`,
+            icon: 'nearby',
+            label: 'Alerts'
+          },
+        ]
+      },
+      'modelOpsRun': {
+        path: '/model-ops/*/model/*/run/**',
+        children: [
+          {
+            path:  [this.sectionParentRoute, 'run', this.sectionName],
+            icon: 'webhook',
+            label: this.sectionName
+          },
+          {
+            path: [this.sectionParentRoute, 'run', this.sectionName, 'life-cycle'],
+            icon: 'nearby',
+            label: 'Life cycle'
+          },
+          {
+            path: [this.sectionParentRoute, 'run', this.sectionName, 'artifacts'],
+            icon: 'nearby',
+            label: 'Artifacts'
+          },
+          {
+            path: [this.sectionParentRoute, 'run', this.sectionName, 'jobs'],
+            icon: 'nearby',
+            label: 'Jobs'
+          },
+        ]
       },
     };
     const navMatches = [];

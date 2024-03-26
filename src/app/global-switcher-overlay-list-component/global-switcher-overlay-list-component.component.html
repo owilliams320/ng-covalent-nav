@@ -1,79 +1,51 @@
-<div style="position: relative;">
+<div style="position: relative">
   <div
-  class="global-selector"
-  id="global-switcher-button"
-  (click)="onGlobalSelect()"
-  #globalSwitcherTrigger>
-  <div class="global-selector-inner">
-  <span
-    *ngIf="selectedSwitcherItem?.id === 'org'; else selectedElseBlock"
-    [ngClass]=""
-    style="display: flex; flex-direction: column; width: 100%"
+    class="global-selector"
+    id="global-switcher-button"
+    (click)="onGlobalSelect()"
+    #globalSwitcherTrigger
   >
-    <cv-typography style="line-height: 0.2; font-weight: bold" scale="body1">{{
-      selectedSwitcherItem?.name
-    }}</cv-typography>
-    <cv-typography class="secondary" style="line-height: 0" scale="body2">{{
-      selectedSwitcherItem?.description
-    }}</cv-typography>
-  </span>
-  <ng-template #selectedElseBlock>
-    <cv-text-lockup
-      style="display: flex; flex-direction: column; width: 100%"
-      scale="small"
-      [subText]="selectedSwitcherItem?.status?.message"
-      [icon]="selectedSwitcherItem?.status?.icon"
-      [state]="selectedSwitcherItem?.status?.state"
-      trailingSubText
-      >{{ selectedSwitcherItem?.name }}</cv-text-lockup
-    >
-  </ng-template>
-  <cv-icon>arrow_drop_down</cv-icon>
-</div>
-</div>
+    <div class="global-selector-inner">
+      <cv-typography scale="subtitle1">{{ selectedSwitcherItem?.name }}</cv-typography>
+      <span class="selector-icons">
+        <cv-icon class="status-icon cv-theme-{{selectedSwitcherItem?.status?.state}}">{{selectedSwitcherItem?.status?.icon}}</cv-icon>
+        <cv-icon>arrow_drop_down</cv-icon>
+      </span>
+    </div>
+  </div>
   <cv-menu corner="BOTTOM_START" #globalSwitcherMenu>
-    <span *ngFor="let item of localGlobalSwitcherItems; index as i" (click)="onGlobalItemSelect(item)">
+    <ng-container
+      *ngFor="let item of localGlobalSwitcherItems; index as i; last as isLast"
+    >
       <cv-typography
-      *ngIf="i === 1"
-      style="line-height: 0.2; font-weight: bold; margin: 12px 12px 0"
-      scale="body1"
-      >Environments</cv-typography>
-      <cv-list-item graphic="medium" >
-        <cv-icon *ngIf="selectedSwitcherItem?.id === item.id" slot="graphic"> check </cv-icon>
-        <span
-            *ngIf="item.id === 'org'; else elseBlock"
-            [ngClass]="
-              selectedSwitcherItem?.id === item.id ? 'org--selected' : 'org'
-            "
-          >
-            <cv-typography
-              style="line-height: 0.2; font-weight: bold"
-              scale="body1"
-              >{{ item.name }}</cv-typography
-            >
-            <cv-typography
-              class="secondary"
-              style="line-height: 0"
-              scale="body2"
-              >{{ item.description }}</cv-typography
-            >
-        </span>
+        *ngIf="i === 1"
+        class="environments-header"
+        scale="caption"
+        >Environments</cv-typography>
+      <cv-list-item graphic="icon" [routerLink]="item?.url" hasMeta [ngClass]="{'org-item': item.id === 'org'}">
+        <cv-icon *ngIf="selectedSwitcherItem?.id === item.id" slot="graphic">
+          check
+        </cv-icon>
+        <cv-text-lockup
+          *ngIf="item.id === 'org'; else elseBlock"
+          [ngClass]="
+            selectedSwitcherItem?.id === item.id ? 'org--selected' : 'org'
+          "
+          scale="small"
+          [subText]="item.description"
+          >{{ item.name }}</cv-text-lockup
+        >
         <ng-template #elseBlock>
-          <cv-text-lockup
-            [ngClass]="
-              selectedSwitcherItem?.id === item.id
-                ? 'child-item--selected'
-                : 'child-item'
-            "
-            scale="small"
-            [subText]="item.status?.message"
-            [icon]="item.status?.icon"
-            [state]="item.status?.state"
-            trailingSubText
-            >{{ item.name }}</cv-text-lockup
-          >
+          {{ item.name }}
         </ng-template>
+        <cv-typography  *ngIf="item.id !== 'org'"  scale="caption" class="cv-theme-{{item.status?.state}}" slot="meta">
+          <cv-icon>{{item.status?.icon}}</cv-icon>
+          {{item.status?.message ? item.status?.message : item.description}}
+        </cv-typography>
       </cv-list-item>
-    </span>
+      <div class="tree-divider" *ngIf="item.id !== 'org'" [ngClass]="{'last': isLast}" >
+          <div class="tree-divider-line"></div>
+      </div>
+    </ng-container>
   </cv-menu>
 </div>
