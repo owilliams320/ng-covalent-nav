@@ -160,3 +160,8 @@ body {
 cv-toolbar {
   margin-bottom: 24px;
 }
+
+cv-icon[size="small"] {
+  --mdc-icon-size: 16px;
+}
+

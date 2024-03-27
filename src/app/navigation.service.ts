@@ -30,7 +30,6 @@ export class NavigationService {
       )
       .subscribe((events: RoutesRecognized[]) => {
         this.previousUrl = events[0].urlAfterRedirects;
-        console.log('previous url', this.previousUrl);
       });
   }
 

@@ -56,7 +56,7 @@ export class GlobalSwitcherOverlayListComponentComponent implements AfterViewIni
         globalSwitcherItems.forEach((item) => {
           if (url.includes(item.id)) {
             this.nav.setNavTitle({
-              name: item.name,
+              name: item.name + 'Environments',
               route: item.url,
               sectionName: item.id,
             });

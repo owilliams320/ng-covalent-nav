@@ -1,7 +1,9 @@
+<cv-card actionBar outlined style="max-width: 1200px; display: flex; margin: 0 auto;">
 <cv-toolbar>
     <span slot="title">Users</span>
     <cv-icon-button slot="actionItems" icon="filter_list"></cv-icon-button>
-    <cv-button color="primary" raised routerLink="/access-management/users/create" class="hidden-small" label="Create user" slot="actionItems"></cv-button>
+    <cv-button (:click)="onCreateUsers()" color="primary" raised on  class="hidden-small" label="Create user" slot="actionItems"></cv-button>
 </cv-toolbar>
 
 <img src="assets/placeholder-content/users.png" style="width: 100%; margin: 0 auto; display: block;"/>
+</cv-card>

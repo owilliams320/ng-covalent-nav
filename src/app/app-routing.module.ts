@@ -35,6 +35,7 @@ import { AccessTokensComponent } from './access-tokens/access-tokens.component';
 import { SettingsComponent } from './environment/settings/settings.component';
 import { CreateComputeComponent } from './create-compute/create-compute.component';
 import { CreateBackupComponent } from './environment/backups/create/create-backup.component';
+import { LearnComponent } from './learn/learn.component';
 
 
 const titlePrefix = 'Vantage cloud lake |';
@@ -100,6 +101,10 @@ const routes: Routes = [
           {
             path: 'users',
             component: UsersComponent,
+          },
+          {
+            path: 'users/create',
+            component: CreateUsersComponent,
           },
           {
             path: 'compute-groups',
@@ -180,6 +185,10 @@ const routes: Routes = [
         component: QueriesComponent
       }
     ]
+  },
+  {
+    path: 'learn',
+    component: LearnComponent,
   },
   {
     path: 'model-ops',

@@ -44,6 +44,7 @@ import { AccessTokensComponent } from './access-tokens/access-tokens.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { EnvironmentSettingsComponent } from './environment-settings/environment-settings.component';
 import { CreateBackupComponent } from './environment/backups/create/create-backup.component';
+import { LearnComponent } from './learn/learn.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { CreateBackupComponent } from './environment/backups/create/create-backu
     ComputeGroupsComponent,
     QueriesComponent,
     QueryGridComponent,
+    LearnComponent,
     ModelOpsComponent,
     ModelComponent,
     ModelOpComponent,

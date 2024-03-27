@@ -14,8 +14,12 @@ export class EnvironmentComponent {
   constructor(private route: ActivatedRoute, private nav: NavigationService) {}
 
   ngOnInit(): void {
-    this.sectionName = this.route.snapshot.paramMap.get('id') ?? '';
-    this.nav.setNavTitle({name: 'Environments', route: '/environments', sectionName:this.sectionName});
+    // this.sectionName = this.route.snapshot.paramMap.get('id') ?? '';
+    this.route.paramMap.subscribe((params) => {
+      this.sectionName = params.get('id') ?? '';
+      this.nav.setNavTitle({name: '', route: '/', sectionName:this.sectionName});
+    });
+
   }
 
 }
