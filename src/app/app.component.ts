@@ -80,7 +80,7 @@ export class AppComponent {
 
   helpOpen = false;
   helpDocked = true;
-  mainSectionContained = true;
+  mainSectionContained = false;
   disableEditor = false;
 
   helpDialog?: MatDialogRef<TdMarkdownNavigatorWindowComponent>;
@@ -163,7 +163,7 @@ export class AppComponent {
   ngOnInit(): void {
     // Set the forced open state based on local storage preference
     this.forcedOpen = JSON.parse(
-      localStorage.getItem('app-preference-open') || 'false'
+      localStorage.getItem('app-preference-open') || 'true'
     );
   }
 
@@ -198,7 +198,7 @@ export class AppComponent {
       '/access-management/*/create',
       '/learn',
     ];
-    let mainSectionContained = true;
+    let mainSectionContained = false;
 
     for (let i = 0; i < barePages.length; i++) {
       // Match the array of patterns to their
@@ -236,10 +236,12 @@ export class AppComponent {
       {
         path: '/documentation',
         label: 'Documentation',
+        external: true,
       },
       {
         path: '/support',
         label: 'Support',
+        external: true,
       },
     ],
   };
@@ -252,8 +254,8 @@ export class AppComponent {
         children: [
           {
             path: '/',
-            icon: 'dashboard',
-            label: 'Dashboard',
+            icon: 'home',
+            label: 'Home',
           },
           {
             label: 'Monitor',
@@ -322,23 +324,29 @@ export class AppComponent {
       },
       environments: {
         path: '/environments/**',
-        showSectionTitle: false,
+        showSectionTitle: true,
         children: [
+          {
+            path: '/',
+            icon: 'home',
+            label: 'Home',
+          },
           {
             path: ['/environments', this.sectionName],
             icon: 'dashboard',
-            label: 'Dashboard'
-          },
-          {
-            path: ['/environments', this.sectionName, 'users'],
-            icon: 'people',
-            label: 'Users',
+            label: 'Dashboard',
+
           },
           {
             path: ['/environments', this.sectionName, 'compute-groups'],
             icon: 'compute_cluster_group',
             covalentIcon: true,
             label: 'Compute groups',
+          },
+          {
+            path: ['/environments', this.sectionName, 'users'],
+            icon: 'people',
+            label: 'Users',
           },
           {
             path: ['/environments', this.sectionName, '**'],

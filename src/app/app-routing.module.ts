@@ -103,6 +103,10 @@ const routes: Routes = [
             component: UsersComponent,
           },
           {
+            path: 'users/create',
+            component: CreateUsersComponent,
+          },
+          {
             path: 'compute-groups',
             component: ComputeGroupsComponent,
           },

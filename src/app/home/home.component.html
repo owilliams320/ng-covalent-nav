@@ -61,23 +61,11 @@
           >
             Create environment
             <span slot="secondary">
-              Step-by-step guide for creating environments
+              Load data into an environment, run queries, view current and historical query data, and manage user access
             </span>
             <div slot="graphic"><cv-icon covalent-icon> server </cv-icon></div>
           </cv-list-item>
-          <cv-list-item
-            [routerLink]="['environments', 'production', 'settings']"
-            graphic="avatar"
-            selected
-            hasMeta
-            twoLine
-          >
-            Enable network access
-            <span slot="secondary">
-              Allow other systems and tools to connect.
-            </span>
-            <div slot="graphic"><cv-icon> network_locked </cv-icon></div>
-          </cv-list-item>
+
           <cv-list-item
             [routerLink]="['access-management', 'users']"
             graphic="avatar"
@@ -187,14 +175,14 @@
           </cv-list-item>
         </cv-list>
         <div slot="card-actions">
-          <cv-button label="Create environment" color="primary"> </cv-button>
+          <cv-button [routerLink]="['environments', 'create']" label="Create environment" color="primary"> </cv-button>
         </div>
       </cv-card>
     </div>
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
       <cv-card cardtitle="Recent backups" outlined actionBar>
         <cv-list>
-          <cv-list-item threeLines hasMeta>
+          <cv-list-item [routerLink]="['environments', 'production', 'backups']" threeLines hasMeta>
             <cv-text-lockup
               subtext="Running"
               scale="small"
@@ -207,7 +195,7 @@
               ><cv-icon slot="meta">arrow_forward</cv-icon></span
             >
           </cv-list-item>
-          <cv-list-item threeLines hasMeta>
+          <cv-list-item [routerLink]="['environments', 'staging', 'backups']" threeLines hasMeta>
             <cv-text-lockup
               subtext="Complete"
               scale="small"
@@ -218,7 +206,7 @@
             >
             <span slot="meta"><cv-icon>arrow_forward</cv-icon></span>
           </cv-list-item>
-          <cv-list-item threeLines hasMeta>
+          <cv-list-item [routerLink]="['environments', 'development', 'backups']" threeLines hasMeta>
             <cv-text-lockup
               subtext="Complete"
               scale="small"
