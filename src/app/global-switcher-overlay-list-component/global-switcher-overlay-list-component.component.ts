@@ -13,7 +13,9 @@ import { NavigationService } from '../navigation.service';
   templateUrl: './global-switcher-overlay-list-component.component.html',
   styleUrl: './global-switcher-overlay-list-component.component.scss',
 })
-export class GlobalSwitcherOverlayListComponentComponent implements AfterViewInit {
+export class GlobalSwitcherOverlayListComponentComponent
+  implements AfterViewInit
+{
   selectedSwitcherItem?: GlobalSwitcherItem = globalSwitcherItems[0];
   localGlobalSwitcherItems = globalSwitcherItems;
 
@@ -23,6 +25,7 @@ export class GlobalSwitcherOverlayListComponentComponent implements AfterViewIni
   constructor(
     private location: Location,
     private router: Router,
+    private route: ActivatedRoute,
     private nav: NavigationService
   ) {}
 
@@ -34,7 +37,27 @@ export class GlobalSwitcherOverlayListComponentComponent implements AfterViewIni
   onGlobalItemSelect(item: GlobalSwitcherItem) {
     this.globalSwitcherMenu?.nativeElement?.removeAttribute('open');
     this.selectedSwitcherItem = item;
-    this.router.navigate([item?.url]);
+    if (item.url.includes('environments') && this.router.url !== '/') {
+      this.router.navigate([this.replaceSecondPathSegment(this.router.url, item.id)]);
+    } else {
+      this.router.navigate([item.url]);
+    }
+  }
+
+  replaceSecondPathSegment(url: string, newSegment: string) {
+    const newURL = new String(url);
+    // Split the pathname into segments, ignore the first empty string from split result
+    const pathSegments = newURL.split('/').filter(Boolean);
+
+    // Replace the first segment
+    if (pathSegments.length > 0) {
+      pathSegments[1] = newSegment;
+    } else {
+      // If there's no path, simply add the new segment
+      pathSegments.push(newSegment);
+    }
+    // Return the modified URL
+    return pathSegments.join('/');
   }
 
   ngAfterViewInit() {
@@ -52,7 +75,6 @@ export class GlobalSwitcherOverlayListComponentComponent implements AfterViewIni
     this.location.onUrlChange((url) => {
       this.selectedSwitcherItem = this.localGlobalSwitcherItems[0];
       if (url !== '/') {
-        
         globalSwitcherItems.forEach((item) => {
           if (url.includes(item.id)) {
             this.nav.setNavTitle({
