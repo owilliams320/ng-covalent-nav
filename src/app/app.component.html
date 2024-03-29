@@ -1,6 +1,6 @@
 <cv-app-shell
   appName="Vantage Cloud Lake"
-  [sectionName]="sectionParentName"
+
   [helpOpen]="helpOpen && helpDocked"
   (:CovalentAppShell:menuClick)="menuToggled()"
   [forcedOpen]="forcedOpen"
@@ -43,10 +43,11 @@
       d="M98.5296 18.0588C98.5296 16.9943 99.3451 16.1551 100.407 16.1551C101.468 16.1551 102.284 16.9943 102.284 18.0588C102.284 19.1233 101.441 19.9907 100.407 19.9907C99.3725 19.9907 98.5296 19.1233 98.5296 18.0588Z"
     />
   </svg>
+
   <cv-icon-button
     slot="section-action"
     icon="arrow_back"
-    routerLink="/"
+    [routerLink]="sectionParentRoute"
   ></cv-icon-button>
 
   <cv-list
