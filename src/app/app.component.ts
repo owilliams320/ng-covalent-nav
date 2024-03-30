@@ -341,7 +341,7 @@ export class AppComponent {
             path: ['/environments', this.sectionName, 'compute-groups'],
             icon: 'compute_cluster_group',
             covalentIcon: true,
-            label: 'Compute groups',
+            label: 'Compute profiles',
           },
           {
             path: ['/environments', this.sectionName, 'users'],
