@@ -43,8 +43,8 @@
 
 .tree-divider {
   border-left: 1px solid var(--cv-theme-divider);
-  height: 48px;
-  margin-top: -48px;
+  height: 56px;
+  margin-top: -56px;
   margin-left: 58px;
 
   .tree-divider-line {
@@ -57,8 +57,8 @@
   }
 
   &.last {
-    height: 24px;
-    margin-top: -48px;
+    height: 28px;
+    margin-top: -56px;
     margin-bottom: 24px;
 
     .tree-divider-line {
