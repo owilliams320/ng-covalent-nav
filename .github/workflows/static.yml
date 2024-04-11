@@ -42,6 +42,8 @@ jobs:
         run: npm ci --force
       - name: Build static artifacts
         run: npm run build -- --base-href /ng-covalent-nav/
+      - name: Copy index.html to 404.html
+        run: cp ./dist/ng-covalent-nav/index.html ./dist/ng-covalent-nav/404.html 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
