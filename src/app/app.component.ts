@@ -11,6 +11,7 @@ import '@covalent/components/app-shell';
 import '@covalent/components/button';
 import '@covalent/components/icon';
 import '@covalent/components/icon-button';
+import '@covalent/components/icon-button-toggle';
 import '@covalent/components/list/list';
 import '@covalent/components/list/nav-list-item';
 import '@covalent/components/toolbar';
@@ -80,7 +81,7 @@ export class AppComponent {
 
   helpOpen = false;
   helpDocked = true;
-  mainSectionContained = false;
+  mainSectionContained = true;
   disableEditor = false;
 
   helpDialog?: MatDialogRef<TdMarkdownNavigatorWindowComponent>;
@@ -190,15 +191,10 @@ export class AppComponent {
   
   setContainedPage(url: string) {
     // List of page URLs that should NOT show the contained state
-    const barePages = [
-      '/',
-      '/environments/*',
-      '/environments/**/create',
-      '/environments/*/compute-groups',
-      '/access-management/*/create',
-      '/learn',
+    const barePages:string[] = [
+      //'/learn',
     ];
-    let mainSectionContained = false;
+    let mainSectionContained = true;
 
     for (let i = 0; i < barePages.length; i++) {
       // Match the array of patterns to their
