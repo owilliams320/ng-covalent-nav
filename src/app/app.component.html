@@ -130,6 +130,7 @@
         covalent-icons
         icon="product_editor"
         routerLink="/editor"
+        [disabled]="disableEditor"
         >SQL editor</cv-button
       >
       <cv-textfield
@@ -139,11 +140,17 @@
         dense
       ></cv-textfield>
       <cv-icon-button slot="actionItems" icon="notifications"></cv-icon-button>
-      <cv-icon-button
+      <cv-icon-button-toggle
+       *ngIf="helpOpen else helpClosed"
         slot="actionItems"
-        icon="help"
+        offIcon="help"
+        onIcon="help"
         (:click)="toggleHelp()"
-      ></cv-icon-button>
+        on
+      ></cv-icon-button-toggle>
+      <ng-template #helpClosed>
+        <cv-icon-button-toggle slot="actionItems" offIcon="help" onIcon="help" (:click)="toggleHelp()"></cv-icon-button-toggle>
+      </ng-template>  
       <cv-icon-button
         slot="actionItems"
         icon="person"

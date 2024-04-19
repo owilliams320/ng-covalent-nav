@@ -4,43 +4,39 @@
   max-width: 1200px;
   margin: auto;
 }
-.learn-content {
-  margin-bottom: 32px;
+
+.learn-content-inner {
+  padding: 24px;
+  display: flex;
+  flex-direction: row;
+}
+
+.learn-title {
+  padding:0 16px 16px;
+}
+
+.learn-text-actions {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cv-icon {
+      margin-left: 24px;
+  }
+}
+
+.mdc-layout-grid__inner {
+  padding: 0 16px 16px;
+}
+
+cv-card {
   display: block;
+  margin-bottom: 16px;
+}
 
-  .learn-content-inner {
-    padding: 24px;
-    display: flex;
-    flex-direction: row;
-  }
-
-  .learn-title {
-    padding: 16px;
-  }
-
-  .learn-text-actions {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    cv-icon {
-        margin-left: 24px;
-    }
-  }
-
-  .mdc-layout-grid__inner {
-    padding: 0 16px 16px;
-  }
-
-  cv-card {
-    display: block;
-    margin-bottom: 16px;
-  }
-
-  cv-icon.learn-icon {
-    --mdc-icon-size: 32px;
-    color: var(--cv-theme-tertiary);
-    margin-right: 24px;
-  }
+cv-icon.learn-icon {
+  --mdc-icon-size: 32px;
+  color: var(--cv-theme-tertiary);
+  margin-right: 24px;
 }

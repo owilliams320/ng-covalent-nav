@@ -1,21 +1,19 @@
-<cv-card actionBar outlined style="max-width: 900px; display: flex; margin: 0 auto;">
-    <cv-toolbar style="margin-top: 24px">
-        <span
-          slot="title"
-          style="display: flex; align-items: flex-start; padding-left: 24px"
-        >
+<cv-toolbar>
+  <span
+    slot="title"
+    style="display: flex; align-items: flex-start; padding-left: 24px"
+  >
 
-          <div style="display: flex; flex-direction: column;">
-              <cv-typography style="padding-top: 6px;" scale="headline5">Settings</cv-typography>
-          </div>
-      
-        </span>
-        <cv-icon-button slot="actionItems" icon="info"></cv-icon-button>
-      </cv-toolbar>
-    
-    <!-- <cv-action-ribbon labelText="this is my label" state="active">
-        <cv-button slot="action-items" label="Bulk action" class="mdc-banner__secondary-action" outlined></cv-button>
-    </cv-action-ribbon> -->
-    
-    <img src="assets/placeholder-content/settings.png" style="width: 100%; margin: 0 auto; display: block;"/>
-    </cv-card>
+    <div style="display: flex; flex-direction: column;">
+        <cv-typography style="padding-top: 6px;" scale="headline5">Settings</cv-typography>
+    </div>
+
+  </span>
+  <cv-icon-button slot="actionItems" icon="info"></cv-icon-button>
+</cv-toolbar>
+
+<!-- <cv-action-ribbon labelText="this is my label" state="active">
+  <cv-button slot="action-items" label="Bulk action" class="mdc-banner__secondary-action" outlined></cv-button>
+</cv-action-ribbon> -->
+
+<img src="assets/placeholder-content/settings.png" style="width: 100%; margin: 0 auto; display: block;"/>
