@@ -33,7 +33,7 @@
   </div>
 
   <div class="mdc-layout-grid__inner">
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
+    <div class="mdc-layout-grid__cell  mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-3-desktop">
       <cv-card cardTitle="Recently viewed" outlined fullHeight>
         <cv-list>
           <a routerLink="/learn"><cv-list-item>
@@ -95,7 +95,7 @@
         </cv-list>
       </cv-card>
     </div>
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-8-tablet">
       <cv-card cardTitle="Overview" outlined>
         <cv-list>
           <cv-list-item hasMeta noninteractive twoLine>
@@ -125,7 +125,7 @@
         </cv-list>
       </cv-card>
     </div>
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-8-tablet">
       <cv-card cardTitle="Environments" outlined actionBar>
         <cv-list>
           <cv-list-item
@@ -179,7 +179,7 @@
         </div>
       </cv-card>
     </div>
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-8-tablet">
       <cv-card cardtitle="Recent backups" outlined actionBar>
         <cv-list>
           <cv-list-item [routerLink]="['environments', 'production', 'backups']" threeLines hasMeta>
