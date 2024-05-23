@@ -8,14 +8,15 @@
   [open]="forcedOpen"
   [contained]="mainSectionContained"
 >
-  <svg
+  <a
     slot="logo"
+    href="/"
+    routerLink="/">
+    <svg
     width="103"
     height="20"
     viewBox="0 0 103 20"
-    style="fill: var(--cv-theme-text-logo-on-background)"
-    routerLink="/"
-  >
+    style="fill: var(--cv-theme-text-logo-on-background)">
     <path
       d="M0 2.30182H3.53561V5.6615H7.47898V8.88045H3.53561V14.5072C3.53561 15.9632 4.26909 16.4391 5.30341 16.4391H7.47898V19.658H5.30341C1.68575 19.658 0 18.0358 0 14.5072V2.30182Z"
     />
@@ -43,7 +44,7 @@
     <path
       d="M98.5296 18.0588C98.5296 16.9943 99.3451 16.1551 100.407 16.1551C101.468 16.1551 102.284 16.9943 102.284 18.0588C102.284 19.1233 101.441 19.9907 100.407 19.9907C99.3725 19.9907 98.5296 19.1233 98.5296 18.0588Z"
     />
-  </svg>
+  </svg></a>
 
   <cv-icon-button
     slot="section-action"
@@ -58,20 +59,22 @@
     activatable
   >
     <ng-container *ngFor="let navRoute of currentRouteSub | async">
-      <cv-nav-list-item
-        graphic="avatar"
+      <a 
         *ngIf="!navRoute.children; else expansionItem"
-        [attr.activated]="checkActive(navRoute.path)"
-        [attr.selected]="checkActive(navRoute.path)"
-        [routerLink]="navRoute.path"
-      >
+        [href]="navRoute.path"
+        [routerLink]="navRoute.path">
+        <cv-nav-list-item
+          graphic="avatar"
+          [attr.activated]="checkActive(navRoute.path)"
+          [attr.selected]="checkActive(navRoute.path)"
+        >
         <cv-icon
           slot="graphic"
           [ngClass]="{ 'covalent-icon': navRoute.covalentIcon }"
           >{{ navRoute.icon }}</cv-icon
         >
         {{ navRoute.label }}
-      </cv-nav-list-item>
+      </cv-nav-list-item></a>
 
       <ng-template #expansionItem>
         <cv-nav-list-item
@@ -88,19 +91,22 @@
             [ngClass]="{ 'covalent-icon': navRoute.covalentIcon }"
             >{{ navRoute.icon }}</cv-icon
           >
-          <cv-list class="subnav" slot="expansion-panel">
-            <cv-nav-list-item
-              *ngFor="let subNavRoute of navRoute.children"
+          <cv-list slot="expansion-panel">
+            <a  
+              *ngFor="let subNavRoute of navRoute.children" 
+              [href]="subNavRoute.path"
               [routerLink]="subNavRoute.path"
+            ><cv-nav-list-item
               [attr.activated]="checkActive(subNavRoute.path)"
               [attr.selected]="checkActive(subNavRoute.path)"
               [hasMeta]="subNavRoute.external"
+              subnav
             >
               {{ subNavRoute.label }}
               <cv-icon *ngIf="subNavRoute.external" slot="meta" size="small"
                 >open_in_new</cv-icon
               >
-            </cv-nav-list-item>
+            </cv-nav-list-item></a>
           </cv-list>
         </cv-nav-list-item>
       </ng-template>
