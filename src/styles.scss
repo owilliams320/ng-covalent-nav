@@ -80,6 +80,10 @@ $theme-light: $td-light-theme;
 body {
   color: var(--cv-theme-on-surface);
   font-family: 'Inter', Arial, Helvetica, sans-serif;
+
+  cv-list[slot="navigation"] a {
+    text-decoration: none;
+  }
 }
 
 // Dark theme
