@@ -14,7 +14,7 @@ raised
 (click)="onCreateNew()"
 #createNewMenuTrigger
 ></cv-button>
-<cv-menu fixed corner="BOTTOM_START" #createNewMenu>
+<cv-menu  corner="BOTTOM_START" #createNewMenu>
 <cv-list-item [routerLink]="['/environments/' + sectionName + '/users/create']"  style="width: 300px;">
   <div class="select-container" >
       Users

@@ -4,7 +4,7 @@
       >VantageCloud Lake dashboard</cv-typography
     >
 
-    <div style="position: relative">
+    <div style="position: relative;">
       <cv-button
         id="org-primary-cta"
         label="Create new"
@@ -15,7 +15,7 @@
         (click)="onCreateNew()"
         #createNewMenuTrigger
       ></cv-button>
-      <cv-menu #createNewMenu fixed corner="BOTTOM_START">
+      <cv-menu #createNewMenu corner="BOTTOM_START">
         <cv-list-item
           [routerLink]="['/environments', 'create']"
           style="width: 300px"
